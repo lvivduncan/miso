@@ -1,0 +1,33 @@
+#about
+{
+    padding: var(--gap100) 0;
+}
+
+#about .wrapper
+{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: var(--gap);
+}
+
+#about h1
+{
+    font-size: 46px;
+}
+
+#about ul 
+{
+    margin: var(--gap) 0 var(--gap) var(--gap);
+}
+
+#about li 
+{
+    margin: var(--gap) 0;
+    font-size: 22px;
+}
+
+#about p
+{
+    line-height: 1.5;
+    font-size: 22px;
+}
