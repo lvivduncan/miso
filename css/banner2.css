@@ -1,0 +1,40 @@
+#banner2
+{
+    background: url('../images/banner2.jpg') no-repeat fixed;
+    min-height: 400px;
+}
+
+#banner2 .wrapper 
+{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: var(--gap);
+    padding: var(--gap100) 0;
+}
+
+#banner2 article
+{
+    display: flex;
+    gap: var(--gap);
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#banner2 svg
+{
+    width: 120px;
+    fill: var(--white);
+}
+
+#banner2 h1
+{
+    color: var(--white);
+}
+
+#banner2 p
+{
+    color: var(--white);
+    text-align: center;
+    line-height: 1.8;
+}

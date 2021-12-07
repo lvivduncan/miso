@@ -15,9 +15,12 @@ font-family: 'Exo 2', sans-serif;
 {
     --white: #fff;
     --gray: #727272;
+    --light: #cec0c0;
 
     --black: #000;
     --orange: #e84e1d;
+    --dark: #283034;
+    --green: #218f1d;
 
     --gap: 20px;
     --gap100: 100px;
@@ -79,5 +82,14 @@ h1,h2,h3,h4,h5
 /* блок з текстом */
 .content
 {
+    align-self: center;
+}
 
+/* заголовок блоку */
+.title
+{
+    text-align: center;
+    color: var(--dark);
+    margin: 0 0 var(--gap100);
+    font-size: 44px;
 }

@@ -1,0 +1,106 @@
+.menu
+{
+    margin: var(--gap100);
+}
+
+.menu .wrapper
+{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: var(--gap);
+}
+
+.menu article
+{
+    display: grid;
+    gap: calc(var(--gap)/2);
+    grid-template-columns: 40px 1fr;
+    grid-template-areas:
+        'menu-aside menu-header'
+        'menu-aside menu-p';
+    cursor: pointer;
+}
+
+.menu header
+{
+    grid-area: menu-header;
+
+    border-bottom: 2px dotted var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu aside
+{
+    grid-area: menu-aside;
+    align-self: center;
+}
+
+.menu aside svg
+{
+    fill: var(--gray);
+    transition: .5s;
+}
+
+.menu article.active svg
+{
+    fill: var(--green);
+}
+
+.menu article:hover svg
+{
+    animation: pulse 1s infinite linear;
+}
+
+@keyframes pulse
+{
+    0%,100%
+    {
+        transform: scale(1,1);
+    }   
+    50%
+    {
+        transform: scale(1.1, 1.1);
+    } 
+}
+
+.menu article h1,
+.menu article span
+{
+    margin: 0;
+    overflow: hidden;
+
+    color: var(--black);
+    text-transform: uppercase;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    position: relative;
+    bottom: -10px;
+    background: var(--white);
+}
+
+.menu article.active h1,
+.menu article.active span
+{
+    color: var(--green);
+}
+
+.menu article h1
+{
+    padding-right: 10px;
+}
+
+.menu article span
+{
+    padding-left: 10px;
+}
+
+.menu p
+{
+    grid-area: menu-p;
+    color: var(--gray);
+    font-weight: 300;
+    font-size: 18px;
+}
