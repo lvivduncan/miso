@@ -1,0 +1,11 @@
+/* ////////////
+// copyright //
+//////////// */
+
+#copy
+{
+    background: var(--dark);
+    font-size: 12px;
+    color: var(--white);
+    text-align: center;
+}

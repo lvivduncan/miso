@@ -1,0 +1,93 @@
+
+/* ///////////////////
+// fancybox gallery //
+/////////////////// */
+
+#gallery
+{
+    padding: var(--gap100) 0;
+    background: var(--gallery);
+}
+
+#gallery .wrapper
+{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: var(--gap);
+}
+
+#gallery a
+{
+    display: block;
+    overflow: hidden;
+    height: 300px;
+
+    position: relative;
+}
+
+#gallery picture
+{
+    display: block;
+    height: 300px;
+    transition: .5s;
+    position: relative;
+}
+
+#gallery a:hover picture
+{
+    transform: scale(1.1);
+}
+
+#gallery picture::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    transition: .5s;
+}
+
+#gallery a:hover picture::before
+{
+    background: rgba(0,0,0,.5);
+}
+
+#gallery picture img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#gallery a span 
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    color: var(--white);
+    padding: var(--gap);
+    transform: translateY(100%);
+    transition: .5s;
+}
+
+#gallery a:hover span
+{
+    transform: translateY(66%);
+}
+
+#gallery a span strong
+{
+    display: block;
+    text-transform: uppercase;
+    margin: 0 0 calc(var(--gap)/2);
+    font-size: 18px;
+    /* color: var(--orange); */
+}

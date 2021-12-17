@@ -5,4 +5,12 @@
 @import url('./banner2.css');
 @import url('./menu.css');
 @import url('./testimonials.css');
-/* @import url('./levus-horizontal-scroll.css'); */
+@import url('./gallery.css');
+@import url('./fancybox.css');
+@import url('./leaflet.css');
+@import url('./footer.css');
+@import url('./copy.css');
+
+/*
+    TODO: images for small devices
+*/

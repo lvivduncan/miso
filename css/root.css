@@ -8,7 +8,6 @@ font-family: 'Exo 2', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /* font-family: 'Open Sans', sans-serif; */
 }
 
 :root
@@ -16,9 +15,11 @@ font-family: 'Exo 2', sans-serif;
     --white: #fff;
     --gray: #727272;
     --light: #cec0c0;
+    --gallery: #f7f7f7;
 
     --black: #000;
     --orange: #e84e1d;
+    --red: #b21218;
     --dark: #283034;
     --green: #218f1d;
 
@@ -100,4 +101,13 @@ h1,h2,h3,h4,h5
 .title.light
 {
     color: var(--white);
+}
+
+/* //////
+// map //
+////// */
+#mapc17p052w
+{
+    width: auto;
+    height: 400px;
 }

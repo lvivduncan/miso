@@ -106,3 +106,17 @@ window.addEventListener('scroll', () => {
         })
     }
 }
+
+// map
+(function () {
+    const map = L.map("mapc17p052w").setView([49.84645127213064,24.024610519409183], 18)
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map)
+
+    L.marker([49.84632328223061,24.02385340142156]).addTo(map)
+
+    return map
+}())
