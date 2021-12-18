@@ -2,9 +2,9 @@
 {
     /* padding: var(--gap100) 0; */
     padding: var(--gap) 0;
-    /* background: var(--dark); */
+    background: var(--dark);
     color: var(--white);
-    background: url('../images/footer.jpg') fixed;
+    /* background: url('../images/footer.jpg') fixed; */
 }
 
 #footer .wrapper

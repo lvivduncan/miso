@@ -4,8 +4,9 @@
 
 #copy
 {
-    background: var(--dark);
+    background: var(--black);
     font-size: 12px;
-    color: var(--white);
+    color: var(--gray);
     text-align: center;
+    padding: 5px;
 }
