@@ -10,9 +10,30 @@
     gap: var(--gap);
 }
 
+@media(max-width:776px)
+{
+    #about .wrapper
+    {
+        display: block;
+    }
+    
+    #about picture
+    {
+        display: none;
+    }
+}
+
 #about h1
 {
     font-size: 46px;
+}
+
+@media(max-width:450px)
+{
+    #about h1
+    {
+        font-size: 32px;
+    }    
 }
 
 #about ul 
@@ -31,4 +52,14 @@
     line-height: 1.5;
     font-size: 22px;
     margin: 0 0 var(--gap);
+}
+
+@media(max-width:776px)
+{
+    #about p
+    {
+        /* line-height: 1.5; */
+        font-size: 16px;
+        /* margin: 0 0 var(--gap); */
+    }    
 }

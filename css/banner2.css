@@ -12,6 +12,17 @@
     padding: var(--gap100) 0;
 }
 
+@media(max-width:776px)
+{
+    #banner2 .wrapper 
+    {
+        /* display: grid; */
+        grid-template-columns: 1fr;
+        /* gap: var(--gap); */
+        /* padding: var(--gap100) 0; */
+    }    
+}
+
 #banner2 article
 {
     display: flex;
@@ -30,6 +41,7 @@
 #banner2 h1
 {
     color: var(--white);
+    text-align: center;
 }
 
 #banner2 p

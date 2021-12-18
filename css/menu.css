@@ -1,6 +1,6 @@
 .menu
 {
-    margin: var(--gap100);
+    margin: var(--gap100) 0;
 }
 
 .menu .wrapper
@@ -8,6 +8,16 @@
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: var(--gap);
+}
+
+@media(max-width:776px)
+{
+    .menu .wrapper
+    {
+        /* display: grid; */
+        grid-template-columns: 1fr;
+        /* gap: var(--gap); */
+    }    
 }
 
 .menu article
@@ -84,6 +94,15 @@
     background: var(--white);
 }
 
+@media(max-width:450px)
+{
+    .menu article h1,
+    .menu article span
+    {
+        font-size: 16px;
+    }
+}
+
 .menu article.active h1,
 .menu article.active span
 {
@@ -110,6 +129,15 @@
 
 .menu picture
 {
-    margin: var(--gap100) 0;
+    margin: var(--gap100);
     display: block;
+}
+
+@media(max-width:776px)
+{
+    .menu picture
+    {
+        margin: var(--gap100) 0;
+        /* display: block; */
+    }    
 }

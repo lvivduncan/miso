@@ -15,6 +15,22 @@
     padding: var(--gap100) 0 var(--gap);
 }
 
+@media(max-width:776px)
+{
+    #banner .wrapper 
+    {
+        padding: 0;
+    }    
+}
+
+@media(max-width:450px)
+{
+    #banner .wrapper 
+    {
+        gap: 5px;
+    }    
+}
+
 #banner h1
 {
     font-size: 50px;
@@ -23,6 +39,23 @@
     text-transform: uppercase;
     transform: scaleY(1.5) scaleX(.75);
     color: var(--white);
+    text-align: center;
+}
+
+@media(max-width:996px)
+{
+    #banner h1
+    {
+        font-size: 30px;
+    }    
+}
+
+@media(max-width:450px)
+{
+    #banner h1
+    {
+        margin: 0;
+    }    
 }
 
 #banner h2
@@ -33,6 +66,24 @@
     text-transform: uppercase;
     color: var(--orange);
     margin: 0 0 var(--gap);
+    text-align: center;
+}
+
+@media(max-width:996px)
+{
+    #banner h2
+    {
+        font-size: 60px;
+    }    
+}
+
+@media(max-width:450px)
+{
+    #banner h2
+    {
+        margin: 0;
+        font-size: 40px;
+    }    
 }
 
 #banner p 
@@ -45,12 +96,39 @@
     margin: 0 0 var(--gap);
 }
 
+@media(max-width:996px)
+{
+    #banner p 
+    {
+        width: 95%;
+        margin: 0 auto var(--gap);
+    }    
+}
+
+@media(max-width:450px)
+{
+    #banner p
+    {
+        font-size: 16px;
+    }
+}
+
 #banner ul 
 {
-    display: flex;
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
     gap: var(--gap);
     width: 75%;
     margin: 0 0 var(--gap);
+}
+
+@media(max-width:776px)
+{
+    #banner ul 
+    {
+        grid-template-columns: repeat(2,1fr);
+    }    
 }
 
 #banner li 
@@ -60,10 +138,39 @@
     color: var(--white);
     font-size: 22px;
     text-transform: uppercase;
+    text-align: center;
+}
+
+#banner li a
+{
+    color: var(--white);
+    text-decoration: none;
 }
 
 #banner li picture
 {
-    margin: 0 0 var(--gap);
+    margin: 0 auto var(--gap);
     display: block;
+    transition: .5s;
+}
+
+@media(max-width:776px)
+{
+    #banner li picture
+    {
+        max-width: 160px;
+    }    
+}
+
+@media(max-width:450px)
+{
+    #banner li picture
+    {
+        max-width: 100px;
+    }    
+}
+
+#banner li a:hover picture
+{
+    transform: scale(1.1)
 }

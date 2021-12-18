@@ -27,6 +27,14 @@ font-family: 'Exo 2', sans-serif;
     --gap100: 100px;
 }
 
+@media(max-width:776px)
+{
+    :root
+    {
+        --gap100: 50px;
+    }
+}
+
 html, body
 {
     height: 100%;
@@ -96,6 +104,14 @@ h1,h2,h3,h4,h5
     text-transform: uppercase;
     font-family: 'Exo 2', sans-serif; 
     font-weight: 700;
+}
+
+@media(max-width:450px)
+{
+    .title
+    {
+        font-size: 32px;
+    }    
 }
 
 .title.light
