@@ -37,7 +37,6 @@
     display: block;
     overflow: hidden;
     height: 300px;
-
     position: relative;
 }
 
@@ -63,21 +62,7 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0);
     transition: .5s;
-}
-
-@media(max-width:776px)
-{
-    #gallery a picture::before
-    {
-        background: rgba(0,0,0,.5);
-    }    
-}
-
-#gallery a:hover picture::before
-{
-    background: rgba(0,0,0,.5);
 }
 
 #gallery picture img
@@ -97,6 +82,7 @@
     left: 0;
     z-index: 2;
     color: var(--white);
+    background: var(--orange);
     padding: var(--gap);
     transform: translateY(100%);
     transition: .5s;
@@ -109,7 +95,6 @@
         transform: translateY(66%);
     }    
 }
-
 
 #gallery a:hover span
 {
