@@ -122,7 +122,8 @@
 .menu p
 {
     grid-area: menu-p;
-    color: var(--gray);
+    /* color: var(--gray); */
+    color: var(--black);
     font-weight: 300;
     font-size: 18px;
 }

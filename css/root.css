@@ -21,7 +21,8 @@ font-family: 'Exo 2', sans-serif;
     --orange: #e84e1d;
     --red: #b21218;
     --dark: #283034;
-    --green: #218f1d;
+    /* --green: #218f1d; */
+    --green: #157a11;
 
     --gap: 20px;
     --gap100: 100px;
