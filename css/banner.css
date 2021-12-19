@@ -115,9 +115,8 @@
 
 #banner ul 
 {
-    /* display: flex; */
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(6,1fr);
     gap: var(--gap);
     width: 75%;
     margin: 0 0 var(--gap);
@@ -127,7 +126,7 @@
 {
     #banner ul 
     {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(3,1fr);
     }    
 }
 

@@ -80,6 +80,7 @@
 .levus-horizontal-scroll li:nth-child(odd)
 {
     background: var(--white);
+    /* color: var(--black); */
 }
 
 .levus-horizontal-scroll article
@@ -148,8 +149,13 @@
 .levus-horizontal-scroll article blockquote
 {
     color: var(--white);
-    color: var(--gray);
+    /* color: var(--gray); */
     line-height: 1.8;
     font-size: 18px;
     font-style: italic;
+}
+
+.levus-horizontal-scroll li:nth-child(odd) blockquote
+{
+    color: var(--black);
 }
