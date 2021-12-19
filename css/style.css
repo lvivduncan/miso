@@ -7,7 +7,8 @@
 @import url('./testimonials.css');
 @import url('./gallery.css');
 @import url('./fancybox.css');
-@import url('./leaflet.css');
+/* @import url('./leaflet.css'); */
+@import url('//unpkg.com/leaflet@1.7.1/dist/leaflet.css');
 @import url('./footer.css');
 @import url('./copy.css');
 
