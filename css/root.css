@@ -128,3 +128,8 @@ h1,h2,h3,h4,h5
     width: auto;
     height: 400px;
 }
+
+.fancybox__caption h1
+{
+    color: var(--white);
+}
