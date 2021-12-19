@@ -108,4 +108,5 @@
     text-transform: uppercase;
     margin: 0 0 calc(var(--gap)/2);
     font-size: 18px;
+    color: var(--white);
 }

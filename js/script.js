@@ -120,3 +120,9 @@ window.addEventListener('scroll', () => {
 
     return map
 }())
+
+
+// img.leaflet-marker-shadow.leaflet-zoom-animated
+// img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive
+
+document.querySelectorAll('.leaflet-zoom-animated').forEach(item => item.setAttribute('alt', ''))
