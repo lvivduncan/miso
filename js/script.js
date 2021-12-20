@@ -5,11 +5,11 @@ window.addEventListener('scroll', () => {
     if(window.pageYOffset < 50){
 
         header.className = ''
-    } else if(window.pageYOffset > 100) {
+    } else if(window.pageYOffset > 1) {
 
         setTimeout( () => {
 
-            header.className = 'active'
+            header.className = 'fixed'
         }, 10)
     }
 })
@@ -36,52 +36,6 @@ window.addEventListener('scroll', () => {
                 // new nodelist
                 li = item.querySelectorAll('li')
             }
-/* 
-            item.innerHTML += '<div class="levus-nav"><span class="left"></span><span class="right"></span></div>'
-
-            item.addEventListener('click', event => {
-
-                const ul = item.querySelector('ul')
-
-                if (event.target.className == 'left') {
-
-                    // move last element
-                    const last = ul.lastElementChild
-                    ul.prepend(last)
-
-                    // destroy transition
-                    ul.style.transition = 'none'
-                    ul.classList.add('to-right')
-
-                    setTimeout(() => {
-
-                        ul.classList.remove('to-right')
-                        ul.style.transition = '.5s'
-                    }, 50)
-                }
-            })
-
-            item.addEventListener('click', event => {
-
-                const ul = item.querySelector('ul')
-
-                if (event.target.className == 'right') {
-
-                    // move first element
-                    const first = ul.firstElementChild
-                    ul.append(first)
-
-                    // destroy transition
-                    ul.style.transition = 'none'
-                    ul.classList.add('to-left')
-
-                    setTimeout(() => {
-
-                        ul.classList.remove('to-left')
-                        ul.style.transition = '.5s'
-                    }, 50)
-                }
-            }) */
 
             setInterval(() => {
                 const ul = item.querySelector('ul')
@@ -121,8 +75,26 @@ window.addEventListener('scroll', () => {
     return map
 }())
 
-
-// img.leaflet-marker-shadow.leaflet-zoom-animated
-// img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive
-
+// додав альти 
 document.querySelectorAll('.leaflet-zoom-animated').forEach(item => item.setAttribute('alt', ''))
+
+// мобільне меню
+document.getElementById('menu').addEventListener('click', () => {
+
+    (new Fancybox([
+        {
+          src: '<nav id="nav"><ul><li><a href="#rolls">Роли</a></li><li><a href="#sashimi">Сашімі</a></li><li><a href="#nigiri">Нігірі</a></li><li><a href="#miso-soup">Місо-суп</a></li></ul><ul><li><a href="#">Про нас</a></li><li><a href="#">Галерея</a></li><li><a href="#testimonials">Відгуки</a></li><li><a href="#">Контакти</a></li></ul></nav>',
+          type: "html",
+        },
+        
+      ]))
+})
+/* 
+// basket
+const products = document.querySelectorAll('.menu article')
+
+for(let i = 0; i<products.length; i++)
+{
+
+
+} */

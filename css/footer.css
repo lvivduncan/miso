@@ -120,3 +120,13 @@
     right: -10px;
     z-index: 1;
 }
+
+#footer-lightbox 
+{
+    color: var(--white);
+}
+
+#footer-lightbox p
+{
+    margin: 0 0 var(--gap);
+}

@@ -16,10 +16,7 @@
 {
     #banner2 .wrapper 
     {
-        /* display: grid; */
         grid-template-columns: 1fr;
-        /* gap: var(--gap); */
-        /* padding: var(--gap100) 0; */
     }    
 }
 
@@ -36,6 +33,15 @@
 {
     width: 120px;
     fill: var(--white);
+}
+
+@media(max-width:776px)
+{
+    #banner2 svg
+    {
+        width: 60px;
+        /* fill: var(--white); */
+    }    
 }
 
 #banner2 h1
