@@ -83,7 +83,7 @@ document.getElementById('menu').addEventListener('click', () => {
 
     (new Fancybox([
         {
-          src: '<nav id="nav"><ul><li><a href="#rolls">Роли</a></li><li><a href="#sashimi">Сашімі</a></li><li><a href="#nigiri">Нігірі</a></li><li><a href="#miso-soup">Місо-суп</a></li></ul><ul><li><a href="#">Про нас</a></li><li><a href="#">Галерея</a></li><li><a href="#testimonials">Відгуки</a></li><li><a href="#">Контакти</a></li></ul></nav>',
+          src: '<nav><ul><li><a href="#rolls">Роли</a></li><li><a href="#sashimi">Сашімі</a></li><li><a href="#nigiri">Нігірі</a></li><li><a href="#miso-soup">Місо-суп</a></li></ul><ul><li><a href="#">Про нас</a></li><li><a href="#">Галерея</a></li><li><a href="#testimonials">Відгуки</a></li><li><a href="#">Контакти</a></li></ul></nav>',
           type: "html",
         },
         
