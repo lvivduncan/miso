@@ -1,0 +1,51 @@
+
+/* ////////////////
+// модальне меню // 
+//////////////// */
+
+#modal ul
+{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: var(--gap);
+}
+
+@media(max-width:776px)
+{
+    #modal ul
+    {
+        /* display: grid; */
+        grid-template-columns: repeat(3,1fr);
+        /* gap: var(--gap); */
+    }    
+}
+
+@media(max-width:540px)
+{
+    #modal ul
+    {
+        /* display: grid; */
+        grid-template-columns: repeat(2,1fr);
+        /* gap: var(--gap); */
+    }    
+}
+
+#modal li 
+{
+    display: block;
+    text-align: center;
+}
+
+#modal a
+{
+    padding: var(--gap);
+    display: block;
+    transition: .5s;
+}
+
+#modal a:hover,
+#modal a:focus
+{
+    outline: 1px solid var(--orange);
+    color: var(--orange);
+}

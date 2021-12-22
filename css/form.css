@@ -1,0 +1,91 @@
+
+/* ///////////////////
+// форма оформлення //
+/////////////////// */
+
+/* temp */
+hr
+{
+    margin: var(--gap)
+}
+
+#form
+{
+    background: url('../images/banner2.jpg');
+    padding: var(--gap);
+}
+
+#form form
+{
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap);
+}
+
+#form form input,
+#form form textarea
+{
+    background: transparent;
+    padding: calc(var(--gap) / 2);
+    outline: none;
+    border: 1px solid var(--white);
+    color: var(--white);
+    font-family: inherit;
+    /* font-size: 18px; */
+}
+
+#form form textarea
+{
+    height: 120px;
+    resize: none;
+}
+
+#form label
+{
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+    color: var(--white);
+}
+
+#form input[type=radio]
+{
+    width: 20px;
+    height: 20px;
+}
+
+::placeholder
+{
+    color: var(--white);
+}
+
+#form button
+{
+    padding: var(--gap);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+    border-radius: 5px;
+    font-family: inherit;
+    /* font-size: 18px; */
+}
+
+/* ///////////////////
+// замовлені товари //
+/////////////////// */
+
+#goods
+{
+    color: var(--white);
+}
+
+#goods ul
+{
+    display: block;
+}
+
+#goods li 
+{
+    display: block;
+}
