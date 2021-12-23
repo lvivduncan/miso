@@ -4,10 +4,10 @@
 /////////////////// */
 
 /* temp */
-hr
+/* hr
 {
     margin: var(--gap)
-}
+} */
 
 #form
 {
@@ -36,7 +36,7 @@ hr
 
 #form form textarea
 {
-    height: 120px;
+    height: 80px;
     resize: none;
 }
 
@@ -61,7 +61,7 @@ hr
 
 #form button
 {
-    padding: var(--gap);
+    padding: calc(var(--gap)/2) var(--gap);
     outline: none;
     border: none;
     cursor: pointer;
@@ -69,6 +69,13 @@ hr
     border-radius: 5px;
     font-family: inherit;
     /* font-size: 18px; */
+}
+
+#form p 
+{
+    margin: calc(var(--gap)/2) 0;
+    color: var(--white);
+    text-transform: uppercase;
 }
 
 /* ///////////////////
@@ -87,5 +94,26 @@ hr
 
 #goods li 
 {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: calc(var(--gap)/2) 0;
+}
+
+#goods span::after
+{
+    content: ' грн'
+}
+
+#goods i 
+{
+    font-style: normal;
+    font-weight: bold;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    background: var(--white);
+    color: var(--dark);
+    align-items: center;
+    justify-content: center;
 }

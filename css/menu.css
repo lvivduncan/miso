@@ -119,10 +119,14 @@
     padding-left: 10px;
 }
 
+.menu article span::after
+{
+    content: ' грн';
+}
+
 .menu p
 {
     grid-area: menu-p;
-    /* color: var(--gray); */
     color: var(--black);
     font-weight: 300;
     font-size: 18px;
@@ -139,6 +143,5 @@
     .menu picture
     {
         margin: var(--gap100) 0;
-        /* display: block; */
     }    
 }
