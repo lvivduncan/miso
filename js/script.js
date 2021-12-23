@@ -227,10 +227,6 @@ for(let i = 0; i < articles.length; i++){
         // підсвітка номінальна, не зберігається після оновлення
         product.classList.add('active')
 
-
-
-
-
         // чек бази. дописуємо, якщо не пуста
         if(localStorage.getItem('names') !== null){
 
@@ -268,7 +264,11 @@ for(let i = 0; i < articles.length; i++){
 // якщо у базі уже щось лежить -- показати кошик
 function toggleBasket(){
 
+    // показати/сховати кошик
     localStorage.getItem('names') ? basket.classList.add('active') : basket.classList.remove('active')
+
+    // кількість товарів
+    localStorage.getItem('names') ? span.innerText = quantityGoods() : span.innerText = ''    
 }
 
 // отримуємо дані з бази і обробляємо
@@ -320,4 +320,10 @@ function viewOrderForm(){
         },
         
     ]))  
+}
+
+// кількість товарів
+function quantityGoods(){
+ 
+    return JSON.parse(localStorage.getItem('prices')).split(';').length
 }
