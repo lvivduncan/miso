@@ -3,12 +3,6 @@
 // форма оформлення //
 /////////////////// */
 
-/* temp */
-/* hr
-{
-    margin: var(--gap)
-} */
-
 #form
 {
     background: url('../images/banner2.jpg');
@@ -76,6 +70,7 @@
     margin: calc(var(--gap)/2) 0;
     color: var(--white);
     text-transform: uppercase;
+    text-align: center;
 }
 
 /* ///////////////////

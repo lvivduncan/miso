@@ -312,7 +312,11 @@ function viewOrderForm(){
                 <label>
                     <input type="radio" name="radio"> потрібна доставка (+200грн)
                 </label>
-                <input type="number" min="10" max="21" placeholder="10:00">
+                <p>Оберіть час: </p>
+                <div id="range">
+                    <span>10</span>
+                    <input type="range" min="10" max="21" value="10">                
+                </div>
                 <button>Оформити замовлення</button>
             </form>
         </div>`,
@@ -327,3 +331,16 @@ function quantityGoods(){
  
     return JSON.parse(localStorage.getItem('prices')).split(';').length
 }
+
+// тест бігунка
+basket.addEventListener('click', () => {
+
+    const range = document.getElementById('range')
+    const span = range.querySelector('span')
+    const input = range.querySelector('input')
+
+    input.addEventListener('input', () => {
+
+        span.innerText = input.value
+    })    
+})
