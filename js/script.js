@@ -204,8 +204,14 @@ const basket = document.getElementById('basket')
 // кількість товарів у кошикові
 const span = basket.querySelector('span')
 
-// відкриваємо форму оформлення замовлення по кліку на кошик
-basket.addEventListener('click', viewOrderForm)
+basket.addEventListener('click', () => {
+    
+    // відкриваємо форму оформлення замовлення по кліку на кошик
+    viewOrderForm()
+
+    // можливіть міняти час доставки/забирання
+    changeDate()
+})
 
 // об'єкти для даних, що будуть писатися у базу
 let names = []
@@ -261,6 +267,40 @@ for(let i = 0; i < articles.length; i++){
     })
 }
 
+// видаляємо товари з бази
+const goods = document.getElementById('goods')
+
+goods && goods.addEventListener('click', event => {
+
+    console.log(event)
+})
+
+
+if(goods !== null){
+
+    // кожна ЛІ має айді, за яким можна видаляти товари
+    const products = goods.querySelectorAll('li')
+
+    for(let i = 0; i<products.length; i++){
+
+        const product = products[i]
+
+        product.addEventListener('click', event => {
+
+            console.log(event)
+
+            if(event.tagName === 'minus'){
+
+                console.log('minus')
+            } else if(event.target.tagName === 'plus'){
+
+                console.log('plus')
+            }
+        })
+    }
+}
+
+
 // якщо у базі уже щось лежить -- показати кошик
 function toggleBasket(){
 
@@ -283,9 +323,9 @@ function goodsFromBase(){
 
         output += `
         <li id="${i}">
-            <i class="minus">-</i>
+            <div class="minus">-</div>
             ${names[i]} <span>${prices[i]}</span>
-            <i class="plus">+</i>
+            <div class="plus">+</div>
         <li>`
     }
 
@@ -298,13 +338,13 @@ function viewOrderForm(){
     (new Fancybox([
         {
           src: `<div id="form">
-            <div id="goods">${goodsFromBase()}</div>
+        <div id="goods">${goodsFromBase()}</div>
 
             <p>Оформити замовлення?</p>
 
             <form>
-                <input type="text" placeholder="ім'я">
-                <input type="number" placeholder="телефон">
+                <input type="text" placeholder="ім'я *" required>
+                <input type="text" placeholder="телефон *" required>
                 <textarea placeholder="коментар"></textarea>
                 <label>
                     <input type="radio" name="radio" checked> забрати самостійно 
@@ -332,15 +372,20 @@ function quantityGoods(){
     return JSON.parse(localStorage.getItem('prices')).split(';').length
 }
 
-// тест бігунка
-basket.addEventListener('click', () => {
+
+function changeDate(){
 
     const range = document.getElementById('range')
-    const span = range.querySelector('span')
-    const input = range.querySelector('input')
 
-    input.addEventListener('input', () => {
+    if(range !== null){
 
-        span.innerText = input.value
-    })    
-})
+        const span = range.querySelector('span')
+        const input = range.querySelector('input')
+    
+        input.addEventListener('input', () => {
+    
+            span.innerText = input.value
+        })
+    }
+}
+
