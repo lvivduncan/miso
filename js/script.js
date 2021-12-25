@@ -218,9 +218,7 @@ basket.addEventListener('click', () => {
     viewOrderForm()
 
     // можливіть міняти час доставки/забирання
-    // changeDate()
-
-    // console.log(range)
+    changeDate()
 })
 
 // об'єкти для даних, що будуть писатися у базу
@@ -273,7 +271,13 @@ for(let i = 0; i < articles.length; i++){
         }
 
         // показуємо кошик
-        toggleBasket()        
+        toggleBasket()     
+        
+        // відкриваємо форму оформлення замовлення по кліку на кошик
+        viewOrderForm()
+
+        // можливіть міняти час доставки/забирання
+        changeDate()
     })
 }
 
@@ -383,9 +387,9 @@ function goodsFromBase(){
 
         output += `
         <li id="${i}">
-            <div class="minus">-</div>
+            <div class="minus"></div>
             ${names[i]} <span>${prices[i]}</span>
-            <div class="plus">+</div>
+            
         <li>`
     }
 
@@ -436,7 +440,7 @@ function quantityGoods(){
  
     return JSON.parse(localStorage.getItem('prices')).split(';').length
 }
-/* 
+
 // зміна дати у модальній формі
 function changeDate(){
 
@@ -454,4 +458,3 @@ function changeDate(){
     }
 }
 
- */
