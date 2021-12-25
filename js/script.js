@@ -178,18 +178,26 @@ document.getElementById('menu').addEventListener('click', () => {
 
 })
 
+// голабальна змінна для усіх фенсібоксів
+let fancybox 
+
 // мобільне меню телефонів
 document.getElementById('phone').addEventListener('click', () => {
 
-    (new Fancybox([
+    fancybox = new Fancybox([
         {
-        src: '<nav id="call"><ul><li><a href="tel:0731305870">(073) 130-58-70</a></li><li><a href="tel:0986533151">(098) 65-331-51</a></li></ul></nav>',
+        src: `
+        <nav id="call">
+            <ul>
+                <li><a href="tel:0731305870">(073) 130-58-70</a></li>
+                <li><a href="tel:0986533151">(098) 65-331-51</a></li>
+            </ul>
+        </nav>`,
         type: "html",
         },
-    ]))
+    ])
 
 })
-
 
 /*
 // клік на кошикові відкриває модальне вікно зі замовленням
@@ -210,7 +218,9 @@ basket.addEventListener('click', () => {
     viewOrderForm()
 
     // можливіть міняти час доставки/забирання
-    changeDate()
+    // changeDate()
+
+    // console.log(range)
 })
 
 // об'єкти для даних, що будуть писатися у базу
@@ -268,38 +278,88 @@ for(let i = 0; i < articles.length; i++){
 }
 
 // видаляємо товари з бази
-const goods = document.getElementById('goods')
+document.addEventListener('click', event => {
 
-goods && goods.addEventListener('click', event => {
+    // якщо у базі ніц немає, то і кнопок не існує
+    if(event.target.className === 'minus'){
+        
+        names = JSON.parse(localStorage.getItem('names')).split(';')
+        prices = JSON.parse(localStorage.getItem('prices')).split(';')
 
-    console.log(event)
-})
+        // отримуємо парента та його айдішку
+        const id = event.target.parentNode.id
 
+        if(names.length === 1){
+            
+            // якщо 1 елемент, видалити і закрити кошик
+            fancybox.close()
+            toggleBasket()
+            
+            names = []
+            prices = []
+            
+            // очищаємо всі активні товари
+            for(let i = 0; i < articles.length; i++) articles[i].classList.remove('active')
 
-if(goods !== null){
+            // очистка бази
+            localStorage.clear()
+        } else {
+            
+            // якщо їх більше 1, видалити означений, перезаписати базу
 
-    // кожна ЛІ має айді, за яким можна видаляти товари
-    const products = goods.querySelectorAll('li')
+            names.splice(id, 1)
+            prices.splice(id, 1)
 
-    for(let i = 0; i<products.length; i++){
+            localStorage.setItem('names', JSON.stringify(names.join(';')))
+            localStorage.setItem('prices', JSON.stringify(prices.join(';'))) 
 
-        const product = products[i]
+            fancybox.close()
+            toggleBasket()
 
-        product.addEventListener('click', event => {
+            // повторно відкриває модальне вікно
+            viewOrderForm()
 
-            console.log(event)
+            // changeDate()
+        }
+        
+    } else if(event.target.className === 'plus'){
+        
+        names = JSON.parse(localStorage.getItem('names')).split(';')
+        prices = JSON.parse(localStorage.getItem('prices')).split(';')
 
-            if(event.tagName === 'minus'){
+        // отримуємо парента та його айдішку
+        const id = event.target.parentNode.id
 
-                console.log('minus')
-            } else if(event.target.tagName === 'plus'){
+        // отримуємо елемент
+        const copyName = names[id]
+        const copyPrice = prices[id]
 
-                console.log('plus')
-            }
+        names.push(copyName)
+        prices.push(copyPrice)
+
+        // додати у базу копію
+        localStorage.setItem('names', JSON.stringify(names.join(';')))
+        localStorage.setItem('prices', JSON.stringify(prices.join(';')))  
+
+        fancybox.close()
+
+        // повторно відкриває модальне вікно
+        viewOrderForm()
+
+        // changeDate()
+
+    } else if(event.target.id === 'range-input'){
+
+        const range = event.target
+    
+        const span = document.getElementById('range-span')
+    
+        range.addEventListener('input', () => {
+    
+            span.innerText = range.value
         })
     }
-}
-
+})
 
 // якщо у базі уже щось лежить -- показати кошик
 function toggleBasket(){
@@ -314,8 +374,8 @@ function toggleBasket(){
 // отримуємо дані з бази і обробляємо
 function goodsFromBase(){
 
-    const names = JSON.parse(localStorage.getItem('names')).split(';')
-    const prices = JSON.parse(localStorage.getItem('prices')).split(';')
+    names = JSON.parse(localStorage.getItem('names')).split(';')
+    prices = JSON.parse(localStorage.getItem('prices')).split(';')
 
     let output = ''
 
@@ -335,35 +395,40 @@ function goodsFromBase(){
 // показати форму оформлення
 function viewOrderForm(){
 
-    (new Fancybox([
+    fancybox = new Fancybox([
         {
-          src: `<div id="form">
-        <div id="goods">${goodsFromBase()}</div>
+            src: `<div id="form">
+                <div id="goods">${goodsFromBase()}</div>
 
-            <p>Оформити замовлення?</p>
+                    <p>Оформити замовлення?</p>
 
-            <form>
-                <input type="text" placeholder="ім'я *" required>
-                <input type="text" placeholder="телефон *" required>
-                <textarea placeholder="коментар"></textarea>
-                <label>
-                    <input type="radio" name="radio" checked> забрати самостійно 
-                </label>
-                <label>
-                    <input type="radio" name="radio"> потрібна доставка (+200грн)
-                </label>
-                <p>Оберіть час: </p>
-                <div id="range">
-                    <span>10</span>
-                    <input type="range" min="10" max="21" value="10">                
-                </div>
-                <button>Оформити замовлення</button>
-            </form>
-        </div>`,
-          type: "html",
+                    <form>
+                        <input type="text" placeholder="ім'я *" required>
+                        <input type="text" placeholder="телефон *" required>
+                        <textarea placeholder="коментар"></textarea>
+
+                        <label>
+                            <input type="radio" name="radio" checked> забрати самостійно 
+                        </label>
+
+                        <label>
+                            <input type="radio" name="radio"> потрібна доставка (+200грн)
+                        </label>
+
+                        <p>Оберіть час: </p>
+
+                        <div id="range">
+                            <span id="range-span">10</span>
+                            <input type="range" min="10" max="21" value="10" id="range-input">                
+                        </div>
+
+                        <button>Оформити замовлення</button>
+                    </form>
+                </div>`,
+            type: "html",
         },
         
-    ]))  
+    ])
 }
 
 // кількість товарів
@@ -371,8 +436,8 @@ function quantityGoods(){
  
     return JSON.parse(localStorage.getItem('prices')).split(';').length
 }
-
-
+/* 
+// зміна дати у модальній формі
 function changeDate(){
 
     const range = document.getElementById('range')
@@ -389,3 +454,4 @@ function changeDate(){
     }
 }
 
+ */
