@@ -294,6 +294,9 @@ document.addEventListener('click', event => {
         const id = event.target.parentNode.id
 
         if(names.length === 1){
+
+            // очистка бази
+            localStorage.clear()            
             
             // якщо 1 елемент, видалити і закрити кошик
             fancybox.close()
@@ -305,8 +308,6 @@ document.addEventListener('click', event => {
             // очищаємо всі активні товари
             for(let i = 0; i < articles.length; i++) articles[i].classList.remove('active')
 
-            // очистка бази
-            localStorage.clear()
         } else {
             
             // якщо їх більше 1, видалити означений, перезаписати базу
@@ -404,6 +405,8 @@ function viewOrderForm(){
             src: `<div id="form">
                 <div id="goods">${goodsFromBase()}</div>
 
+                    <div id="total-goods">${totalSum()}</div>
+
                     <p>Оформити замовлення?</p>
 
                     <form>
@@ -458,3 +461,9 @@ function changeDate(){
     }
 }
 
+function totalSum(){
+
+    prices = JSON.parse(localStorage.getItem('prices')).split(';')
+
+    return prices.reduce((sum,item) => sum += +item, 0)
+}

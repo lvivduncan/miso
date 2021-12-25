@@ -151,3 +151,23 @@
     background: var(--white);
     transform: rotate(-45deg);
 }
+
+/* ////////////////
+// загальна сума //
+//////////////// */
+#total-goods
+{
+    text-align: center;
+    margin: 0 0 var(--gap);
+    color: var(--white);
+}
+
+#total-goods::after
+{
+    content: ' грн';    
+}
+
+#total-goods::before
+{
+    content: 'Всього: ';
+}
