@@ -52,6 +52,7 @@ body.active
     stroke-width: 3px;
     stroke-linejoin: bevel;
     stroke-linecap: round;
+    cursor: pointer;
 }
 
 #form
