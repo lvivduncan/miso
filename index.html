@@ -543,6 +543,41 @@
         </div>
     </footer>
 
+    <div id="order">
+        <div id="order-wrapper"></div>
+        <div id="close"><svg viewBox="0 0 24 24"><path d="M20 20L4 4m16 0L4 20"></path></svg></div>
+        <div id="form">
+            <div id="goods"></div>
+
+            <div id="total-goods"></div>
+
+            <p>Оформити замовлення?</p>
+
+            <form>
+                <input type="text" placeholder="ім'я *" required>
+                <input type="text" placeholder="телефон *" required>
+                <textarea placeholder="коментар"></textarea>
+
+                <label>
+                    <input type="radio" name="radio" checked> забрати самостійно 
+                </label>
+
+                <label>
+                    <input type="radio" name="radio"> потрібна доставка (+200грн)
+                </label>
+
+                <p>Оберіть час: </p>
+
+                <div id="range">
+                    <span id="range-span">10</span>
+                    <input type="range" min="10" max="21" value="10" id="range-input">                
+                </div>
+
+                <button>Оформити замовлення</button>
+            </form>
+        </div>
+    </div>
+
     <script src="//unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="js/fancybox.esm.js"></script>
     <script src="js/script.js"></script>

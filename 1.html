@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<!--     <form id=”form”>
+        <input name=”username” type=”text”> <button id="button">send</button> 
+    </form> -->
+
+    
+    <button id="button">send</button>
+
+    <script>
+    
+    // const form = document.getElementById('form')
+
+    // const param = new FormData()
+
+    // param.append(name, 'username')
+
+    button.addEventListener('click', event => {
+
+        event.preventDefault()
+
+        // console.log(form,param)
+
+
+
+        const formData = new FormData();
+        // const fileField = document.querySelector('input[type="file"]');
+
+        formData.append('user', 'abc123');
+        // formData.append('avatar', fileField.files[0]);
+
+        try {
+        const response = fetch('mail/send.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = response.json();
+
+            console.log('Успех:', JSON.stringify(result));
+        } catch (error) {
+
+            console.error('Ошибка:', error);
+        }
+
+
+    })
+
+/*         
+
+        const url = 'mail/send.php'
+
+        form.addEventListener('submit', event => {
+
+            event.preventDefault()
+
+            fetch(url, {
+                method: 'POST',
+                body: new FormData( document.getElementById('form') )
+            });
+
+        }) */
+/* 
+        document.getElementById('button').addEventListener('click', event => {
+
+            const url = 'mail/send.php'
+
+            event.preventDefault()
+
+            fetch(url, {
+                method: 'POST',
+                body: new FormData( document.getElementById('form') )
+            });        
+            
+        })
+ */
+    </script>
+</body>
+</html>

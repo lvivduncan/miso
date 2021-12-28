@@ -299,7 +299,8 @@ document.addEventListener('click', event => {
             localStorage.clear()            
             
             // якщо 1 елемент, видалити і закрити кошик
-            fancybox.close()
+            // fancybox.close()
+            hideOrderForm()
             toggleBasket()
             
             names = []
@@ -318,7 +319,8 @@ document.addEventListener('click', event => {
             localStorage.setItem('names', JSON.stringify(names.join(';')))
             localStorage.setItem('prices', JSON.stringify(prices.join(';'))) 
 
-            fancybox.close()
+            // fancybox.close()
+            hideOrderForm()
             toggleBasket()
 
             // повторно відкриває модальне вікно
@@ -346,10 +348,11 @@ document.addEventListener('click', event => {
         localStorage.setItem('names', JSON.stringify(names.join(';')))
         localStorage.setItem('prices', JSON.stringify(prices.join(';')))  
 
-        fancybox.close()
+        // fancybox.close()
+        // hideOrderForm()
 
         // повторно відкриває модальне вікно
-        viewOrderForm()
+        // viewOrderForm()
 
         // changeDate()
 
@@ -366,7 +369,30 @@ document.addEventListener('click', event => {
     }
 })
 
-// якщо у базі уже щось лежить -- показати кошик
+// натиснути ескейп
+document.addEventListener('keydown', event => {
+
+    if(event.key === 'Escape' || event.code === 'Escape'){
+
+        hideOrderForm()
+    }
+})
+
+// клік на кнопку з хрестиком
+document.getElementById('close') && document.getElementById('close').addEventListener('click', hideOrderForm)
+
+// клік на поле поза формою оформлення
+document.getElementById('order-wrapper') && document.getElementById('order-wrapper').addEventListener('click', hideOrderForm)
+
+// видаляємо товари з кошика
+document.getElementById('goods') && document.getElementById('goods').addEventListener('click', event => {
+
+    if(event.target.tagName === 'minus'){
+
+    }
+})
+
+// якщо у базі уже щось лежить -- показати кошик (іконку)
 function toggleBasket(){
 
     // показати/сховати кошик
@@ -397,45 +423,22 @@ function goodsFromBase(){
     return `<ul>${output}</ul>`
 }
 
-// показати форму оформлення
+// показати форму оформлення з товарами
 function viewOrderForm(){
 
-    fancybox = new Fancybox([
-        {
-            src: `<div id="form">
-                <div id="goods">${goodsFromBase()}</div>
+    document.getElementById('order').classList.add('active')
+    document.body.classList.add('active')
 
-                    <div id="total-goods">${totalSum()}</div>
+    document.getElementById('goods').innerHTML = goodsFromBase()
 
-                    <p>Оформити замовлення?</p>
+    document.getElementById('total-goods').innerHTML = totalSum()
+}
 
-                    <form>
-                        <input type="text" placeholder="ім'я *" required>
-                        <input type="text" placeholder="телефон *" required>
-                        <textarea placeholder="коментар"></textarea>
+// приховати форму
+function hideOrderForm(){
 
-                        <label>
-                            <input type="radio" name="radio" checked> забрати самостійно 
-                        </label>
-
-                        <label>
-                            <input type="radio" name="radio"> потрібна доставка (+200грн)
-                        </label>
-
-                        <p>Оберіть час: </p>
-
-                        <div id="range">
-                            <span id="range-span">10</span>
-                            <input type="range" min="10" max="21" value="10" id="range-input">                
-                        </div>
-
-                        <button>Оформити замовлення</button>
-                    </form>
-                </div>`,
-            type: "html",
-        },
-        
-    ])
+    document.getElementById('order').classList.remove('active')
+    document.body.classList.remove('active')
 }
 
 // кількість товарів
@@ -461,6 +464,7 @@ function changeDate(){
     }
 }
 
+// загальна сума
 function totalSum(){
 
     prices = JSON.parse(localStorage.getItem('prices')).split(';')
