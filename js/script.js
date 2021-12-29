@@ -252,6 +252,12 @@ for(let i = 0; i < articles.length; i++){
         // підсвітка номінальна, не зберігається після оновлення
         product.classList.add('active')
 
+        // TODO: додати перевірку на знижку
+        if(product.classList.contains('bonus')){
+
+            console.log('bonus')
+        }
+
         // чек бази. дописуємо, якщо не пуста
         if(localStorage.getItem('names') !== null){
 
