@@ -547,13 +547,25 @@
         <div id="order-wrapper"></div>
         <div id="close"><svg viewBox="0 0 24 24"><path d="M20 20L4 4m16 0L4 20"></path></svg></div>
         <div id="form">
+
+            <div id="area">
+                <label id="lviv">
+                    <input type="radio" name="area" checked value="Львів"> Львів
+                </label>
+
+                <label id="not-lviv">
+                    <input type="radio" name="area" value="за Львовом"> за Львовом
+                </label>
+
+                <div id="minimal">Мінімальна сума замовлення: <span id="area-check">400</span></div>
+            </div>
+
             <div id="goods"></div>
 
             <div id="total-goods"></div>
 
-            <p>Оформити замовлення?</p>
-
             <form>
+                <p>Оформити замовлення?</p>
                 <input type="text" placeholder="ім'я *" required>
                 <input type="text" placeholder="телефон *" required>
                 <textarea placeholder="коментар"></textarea>

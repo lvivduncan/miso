@@ -143,6 +143,11 @@ body.active
     text-align: center;
 }
 
+label
+{
+    cursor: pointer;
+}
+
 /* ///////////////////
 // замовлені товари //
 /////////////////// */
@@ -265,4 +270,44 @@ body.active
 #total-goods::before
 {
     content: 'Всього: ';
+}
+
+/* /////////////////
+// місце доставки //
+///////////////// */
+
+#area
+{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-areas: 
+        'lviv not-lviv'
+        'minimal minimal';
+    align-items: center;
+    margin: 0 0 var(--gap);
+    gap: var(--gap)
+}
+
+#lviv
+{
+    grid-area: lviv;
+    justify-content: flex-end;
+}
+
+#not-lviv
+{
+    grid-area: not-lviv;
+}
+
+#minimal
+{
+    grid-area: minimal;
+
+    color: var(--white);
+    text-align: center;
+}
+
+#area-check::after
+{
+    content: ' грн';
 }

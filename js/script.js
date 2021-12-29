@@ -217,6 +217,9 @@ const basket = document.getElementById('basket')
 // кількість товарів у кошикові
 const span = basket.querySelector('span')
 
+// мінімальна сума замовлення
+const areaCheck = document.getElementById('area-check')
+
 basket.addEventListener('click', () => {
     
     // відкриваємо форму оформлення замовлення по кліку на кошик
@@ -394,13 +397,17 @@ document.getElementById('close') && document.getElementById('close').addEventLis
 // клік на поле поза формою оформлення
 document.getElementById('order-wrapper') && document.getElementById('order-wrapper').addEventListener('click', hideOrderForm)
 
-// видаляємо товари з кошика
-/* document.getElementById('goods') && document.getElementById('goods').addEventListener('click', event => {
+// чЕкаємо місце доставки
+document.querySelectorAll('#area input').forEach(item => {
 
-    if(event.target.tagName === 'minus'){
+    item.addEventListener('input', function() {
 
-    }
-}) */
+        // console.log(this.value)
+        this.value === 'Львів' ? areaCheck.textContent = '400' : areaCheck.textContent = '600'
+
+        toggleForm()
+    })
+})
 
 // якщо у базі уже щось лежить -- показати кошик (іконку)
 function toggleBasket(){
@@ -487,5 +494,6 @@ function toggleForm(){
 
     const form = document.querySelector('#form form');
 
-    totalSum() > 600 ? form.classList.add('active') : form.classList.remove('active')
+    // totalSum() > 600 ? form.classList.add('active') : form.classList.remove('active')
+    totalSum() >= areaCheck.textContent ? form.classList.add('active') : form.classList.remove('active')
 }
