@@ -224,6 +224,9 @@ basket.addEventListener('click', () => {
 
     // можливіть міняти час доставки/забирання
     changeDate()
+
+    // показати/сховати форму
+    toggleForm()
 })
 
 // об'єкти для даних, що будуть писатися у базу
@@ -331,7 +334,8 @@ document.addEventListener('click', event => {
             // повторно відкриває модальне вікно
             viewOrderForm()
 
-            // changeDate()
+            // показати/сховати форму
+            toggleForm()
         }
         
     } else if(event.target.className === 'plus'){
@@ -357,9 +361,10 @@ document.addEventListener('click', event => {
         // hideOrderForm()
 
         // повторно відкриває модальне вікно
-        // viewOrderForm()
+        viewOrderForm()
 
-        // changeDate()
+        // показати/сховати форму
+        toggleForm()
 
     } else if(event.target.id === 'range-input'){
 
@@ -390,12 +395,12 @@ document.getElementById('close') && document.getElementById('close').addEventLis
 document.getElementById('order-wrapper') && document.getElementById('order-wrapper').addEventListener('click', hideOrderForm)
 
 // видаляємо товари з кошика
-document.getElementById('goods') && document.getElementById('goods').addEventListener('click', event => {
+/* document.getElementById('goods') && document.getElementById('goods').addEventListener('click', event => {
 
     if(event.target.tagName === 'minus'){
 
     }
-})
+}) */
 
 // якщо у базі уже щось лежить -- показати кошик (іконку)
 function toggleBasket(){
@@ -421,7 +426,7 @@ function goodsFromBase(){
         <li id="${i}">
             <div class="minus"></div>
             ${names[i]} <span>${prices[i]}</span>
-            
+            <div class="plus"></div>
         <li>`
     }
 
@@ -475,4 +480,12 @@ function totalSum(){
     prices = JSON.parse(localStorage.getItem('prices')).split(';')
 
     return prices.reduce((sum,item) => sum += +item, 0)
+}
+
+// показуємо/ховаємо форму залежно від суми
+function toggleForm(){
+
+    const form = document.querySelector('#form form');
+
+    totalSum() > 600 ? form.classList.add('active') : form.classList.remove('active')
 }
