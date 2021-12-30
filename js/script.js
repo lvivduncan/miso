@@ -547,3 +547,54 @@ function toggleForm(){
     // totalSum() > 600 ? form.classList.add('active') : form.classList.remove('active')
     totalSum() >= areaCheck.textContent ? form.classList.add('active') : form.classList.remove('active')
 }
+
+/* ////////////////////////
+// оформлення замовлення //
+//////////////////////// */
+
+const formElem = document.querySelector('#form form')
+
+formElem.onsubmit = async function(e) {
+
+    e.preventDefault()
+
+    const formData = new FormData(this)
+    const param = new URLSearchParams()
+
+    for(const pair of formData){
+
+    // 2 input, 1 textarea
+    param.append(pair[0], pair[1], pair[2])
+}
+
+    // order goods
+    param.append('goods', names)
+
+    let response = await fetch('https://miso.lviv.ua/mail/send.php', {
+
+        method: 'POST',
+        body: param
+    })
+
+    let result = await response.text()
+
+    // must be "ok"
+    console.log(result)
+
+    // успішна відправка
+    if(result == 'ok'){
+
+        const ok = new Fancybox([
+            {
+                src: '<p>Усе гаразд! Замовлення надіслано!</p>',
+                type: "html",
+            },
+        ])
+
+        setTimeout(() => {
+            
+            ok.close();
+        }, 2000);
+    }
+
+};
