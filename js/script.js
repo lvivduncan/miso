@@ -109,65 +109,102 @@ document.getElementById('menu').addEventListener('click', () => {
             <nav id="modal">
                 <ul>
                     <li>
-                        <a href="#rolls">
-                            <picture>                            
-                                <img src="images/rolls.png" alt="">
+                        <a href="#id-0">
+                            <picture>
+                                <source srcset="images/rolls.webp" type="image/webp">
+                                <img src="images/rolls.png" alt="" width="600" height="400">
                             </picture>
-                            Філадельфія
+                            Філадельфія                        
                         </a>
                     </li>
 
                     <li>
-                        <a href="#sashimi">
+                        <a href="#id-1">
                             <picture>
-                                <img src="images/sashimi.png" alt="">
+                                <source srcset="images/california.webp" type="image/webp">
+                                <img src="images/california.png" alt="" width="600" height="400">
                             </picture>
-                            Дракони
+                            Каліфорнія                        
                         </a>
                     </li>
 
                     <li>
-                        <a href="#hosomaki">
+                        <a href="#id-2">
                             <picture>
-                                <img src="images/hosomaki.png" alt="">
+                                <source srcset="images/avocado.webp" type="image/webp">
+                                <img src="images/avocado.png" alt="" width="600" height="400">
                             </picture>
-                            Хосомаки
+                            Авокадо-рол                        
                         </a>
                     </li>
 
                     <li>
-                        <a href="#nigiri">
+                        <a href="#id-3">
                             <picture>
-                                <img src="images/nigiri.png" alt="">
+                                <source srcset="images/sashimi.webp" type="image/webp">
+                                <img src="images/sashimi.png" alt="" width="600" height="400">
                             </picture>
-                            Нігірі
+                            Дракони                        
                         </a>
                     </li>
 
                     <li>
-                        <a href="#drink">
+                        <a href="#id-4">
                             <picture>
-                                <img src="images/drink.png" alt="">
+                                <source srcset="images/hosomaki.webp" type="image/webp">
+                                <img src="images/hosomaki.png" alt="" width="600" height="400">
                             </picture>
-                            Напої
+                            Хосомаки                        
                         </a>
                     </li>
 
                     <li>
-                        <a href="#box-set">
+                        <a href="#id-5">
                             <picture>
-                                <img src="images/set.png" alt="">
+                                <source srcset="images/nigiri.webp" type="image/webp">
+                                <img src="images/nigiri.png" alt="" width="600" height="400">
                             </picture>
-                            Бокс сети
+                            Нігірі                        
                         </a>
                     </li>
 
                     <li>
-                        <a href="#miso-soup">
+                        <a href="#id-6">
                             <picture>
-                                <img src="images/ramen.png" alt="">
+                                <source srcset="images/drink.webp" type="image/webp">
+                                <img src="images/drink.png" alt="" width="600" height="400">
                             </picture>
-                            Місо-суп
+                            Напої                        
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#id-7">
+                            <picture>
+                                <source srcset="images/set.webp" type="image/webp">
+                                <img src="images/set.png" alt="" width="600" height="400">
+                            </picture>
+                            Бокс сети                        
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#id-8">
+                            <picture>
+                                <source srcset="images/ramen.webp" type="image/webp">
+                                <img src="images/ramen.png" alt="" width="600" height="400">
+                            </picture>
+                            Місо-суп                        
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#id-10">
+                            <picture>
+                                <source srcset="images/ramen.webp" type="image/webp">
+                                <img src="images/ramen.png" alt="" width="600" height="400">
+                            </picture>
+                            Місо-боул                        
                         </a>
                     </li>
                 </ul>
