@@ -648,9 +648,9 @@
 
             <form>
                 <p>Оформити замовлення?</p>
-                <input type="text" name="name" placeholder="ім'я *" required>
-                <input type="text" name="phone" placeholder="телефон *" required>
-                <textarea name="comment" placeholder="коментар"></textarea>
+                <input type="text" name="name" placeholder="ім'я *" required id="form-name">
+                <input type="text" name="phone" placeholder="телефон *" required id="form-phone">
+                <textarea name="comment" placeholder="коментар" id="form-comment"></textarea>
 
                 <div id="discount">
                     <label>
@@ -666,7 +666,7 @@
 
                 <div id="range">
                     <span id="range-span">10</span>
-                    <input type="range" min="10" max="21" value="10" id="range-input">                
+                    <input type="range" min="10" max="21" value="10" id="range-input" name="form-range">
                 </div>
 
                 <button>Оформити замовлення</button>

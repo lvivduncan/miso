@@ -360,7 +360,6 @@ document.addEventListener('click', event => {
             localStorage.clear()            
             
             // якщо 1 елемент, видалити і закрити кошик
-            // fancybox.close()
             hideOrderForm()
             toggleBasket()
             
@@ -554,21 +553,34 @@ function toggleForm(){
 
 const formElem = document.querySelector('#form form')
 
-formElem.onsubmit = async function(e) {
+console.log(formElem)
 
-    e.preventDefault()
+formElem.onsubmit = async function(event) {
 
-    const formData = new FormData(this)
+    event.preventDefault()
+
+    // const formData = new FormData(this)
     const param = new URLSearchParams()
 
-    for(const pair of formData){
+    // for(const pair of formData){
 
-    // 2 input, 1 textarea
-    param.append(pair[0], pair[1], pair[2])
-}
+    //     // 2 input, 1 textarea, 1range
+    //     param.append(pair[0], pair[1], pair[2], pair[3])
+    // }
+
+    const form_name = document.getElementById('form-name').value
+    const form_phone = document.getElementById('form-phone').value
+    const form_comment = document.getElementById('form-comment').value
+    const form_range = document.getElementById('range-input').value
 
     // order goods
     param.append('goods', names)
+    param.append('prices', prices)
+
+    param.append('name', form_name)
+    param.append('phone', form_phone)
+    param.append('comment', form_comment)
+    param.append('range', form_range)
 
     let response = await fetch('https://miso.lviv.ua/mail/send.php', {
 
@@ -584,17 +596,40 @@ formElem.onsubmit = async function(e) {
     // успішна відправка
     if(result == 'ok'){
 
-        const ok = new Fancybox([
-            {
-                src: '<p>Усе гаразд! Замовлення надіслано!</p>',
-                type: "html",
-            },
-        ])
+        // очистка бази
+        localStorage.clear()            
+
+        // якщо 1 елемент, видалити і закрити кошик
+        hideOrderForm()
+        toggleBasket()
+        
+        names = []
+        prices = []
+        
+        // очищаємо всі активні товари
+        for(let i = 0; i < articles.length; i++) articles[i].classList.remove('active')
+
+        let ok
 
         setTimeout(() => {
             
-            ok.close();
-        }, 2000);
+            ok = new Fancybox([
+                {
+                    src: '<p>Усе гаразд! Замовлення надіслано!</p>',
+                    type: "html",
+                },
+            ])
+
+        }, 1000)
+
+        setTimeout(() => {
+            
+            ok.close()
+
+        }, 2000)
+    } else {
+
+        console.error(error)
     }
 
-};
+}
