@@ -252,10 +252,14 @@ for(let i = 0; i < articles.length; i++){
         // підсвітка номінальна, не зберігається після оновлення
         product.classList.add('active')
 
-        // TODO: додати перевірку на знижку
-        if(product.classList.contains('bonus')){
+        // знижка 25% тільки на роли з міткою бонус
+        // якщо юзер обрав і роли з бонусом, то має змогу забрати сам та отримати знижку на все?
+        const discount = document.getElementById('discount')
 
-            console.log('bonus')
+        // TODO: додати перевірку на знижку
+        if(product.classList.contains('discount')){
+
+            discount.classList.add('active')
         }
 
         // чек бази. дописуємо, якщо не пуста

@@ -311,3 +311,14 @@ label
 {
     content: ' грн';
 }
+
+/* можлива знижка, якщо забрати самому */
+#discount
+{
+    display: none;
+}
+
+#discount.active
+{
+    display: block;
+}
