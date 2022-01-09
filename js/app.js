@@ -282,7 +282,7 @@ basket.addEventListener('click', () => {
     const goodsElement = element()
     goodsElement.id = 'goods'
 
-    let goodsElementInner = element()
+    // let goodsElementInner = element()
 
 
     // блок тотал -- сума
@@ -390,8 +390,8 @@ basket.addEventListener('click', () => {
     areaElement.append(areaLviv, areaNotLviv, minimal)
 
     // 5. goodsElement
-    goodsElement.append(goodsElementInner)
-    goodsElementInner.append(goodsFromBase())
+    goodsElement.append(goodsFromBase())
+    // goodsElementInner.append(goodsFromBase())
 
     // 6. збираємо блок з даними
     formElement.append(areaElement, goodsElement, totalElement, form)
@@ -440,13 +440,14 @@ basket.addEventListener('click', () => {
                 minimalSpan.textContent = '600'
 
             // показати/сховати форму
-            // totalSum() >= minimalSpan.textContent ? 
-            //     form.classList.add('active') : 
-            //     form.classList.remove('active')
-
             toggleForm()
         })
     })
+
+
+
+    // todo: баг, якщо закрити форму -- замовлення дублюються
+    // todo: припускаю -- потрібно оновити 3 масиви
 
 
     // видаляємо товари з форми замовлення
@@ -457,6 +458,8 @@ basket.addEventListener('click', () => {
             
             names = JSON.parse(localStorage.getItem('names')).split(';')
             prices = JSON.parse(localStorage.getItem('prices')).split(';')
+            discount = JSON.parse(localStorage.getItem('discount')).split(';')
+            // localStorage.setItem('discount', JSON.stringify(discount.join(';')))  
     
             // отримуємо парента та його айдішку
             const id = event.target.parentNode.id
@@ -467,13 +470,14 @@ basket.addEventListener('click', () => {
                 localStorage.clear()            
                 
                 //
-                // todo якщо 1 елемент, видалити і закрити кошик
+                // todo: якщо 1 елемент, видалити і закрити кошик
                 
                 //
                 toggleBasket()
                 
                 names = []
                 prices = []
+                discount = []
                 
                 // знімаємо відмітку з усіх активних товарів
                 for(let i = 0; i < articles.length; i++) articles[i].classList.remove('active')
@@ -483,13 +487,17 @@ basket.addEventListener('click', () => {
                 // якщо їх більше 1, видалити означений, перезаписати базу
                 names.splice(id, 1)
                 prices.splice(id, 1)
+                discount.splice(id, 1)
     
                 localStorage.setItem('names', JSON.stringify(names.join(';')))
                 localStorage.setItem('prices', JSON.stringify(prices.join(';'))) 
+                localStorage.setItem('discount', JSON.stringify(discount.join(';'))) 
     
                 toggleBasket()
     
-                // // test:
+                // test:
+                goodsElement.innerHTML = ''
+                goodsElement.append(goodsFromBase())
                 // goodsElementInner.remove()
                 // goodsElementInner = element()
                 // goodsElement.append(goodsElementInner)
@@ -503,6 +511,7 @@ basket.addEventListener('click', () => {
             
             names = JSON.parse(localStorage.getItem('names')).split(';')
             prices = JSON.parse(localStorage.getItem('prices')).split(';')
+            discount = JSON.parse(localStorage.getItem('discount')).split(';')
     
             // отримуємо парента та його айдішку
             const id = event.target.parentNode.id
@@ -510,15 +519,20 @@ basket.addEventListener('click', () => {
             // отримуємо елемент
             const copyName = names[id]
             const copyPrice = prices[id]
+            const copyDiscount = discount[id]
     
             names.push(copyName)
             prices.push(copyPrice)
+            discount.push(copyDiscount)
     
             // додати у базу копію
             localStorage.setItem('names', JSON.stringify(names.join(';')))
             localStorage.setItem('prices', JSON.stringify(prices.join(';')))
+            localStorage.setItem('discount', JSON.stringify(discount.join(';')))
 
-            // // test:
+            // test:
+            goodsElement.innerHTML = ''
+            goodsElement.append(goodsFromBase())
             // goodsElementInner.remove()
             // goodsElementInner = element()
             // goodsElement.append(goodsElementInner)
@@ -538,6 +552,10 @@ basket.addEventListener('click', () => {
                 span.innerText = range.value
             })
         }
+
+        // оновлюємо суму замовлення по кожному кліку
+        totalElement.textContent = totalSum()
+
     })
 
 
