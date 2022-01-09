@@ -38,7 +38,7 @@
                 </picture>
                 
                 <div id="basket">
-                    <span>12</span>
+                    <span></span>
                 </div>
                 <div id="menu" title="меню"></div>
             </div>
@@ -208,6 +208,7 @@
                     <div class="icon"></div>
                 </aside>
                 <p>Ковбаса, шинка, майонез і макарони</p>
+                <div class="desc">discount</div>
             </article>
 
             <article>
@@ -271,6 +272,7 @@
                     <div class="icon"></div>
                 </aside>
                 <p>Свіжий срібнолусковий морський дракон</p>
+                <div class="desc">discount</div>
             </article>
             <article>
                 <header>
@@ -441,6 +443,7 @@
                     <div class="icon"></div>
                 </aside>
                 <p>Фреш-сік з мандаринів (Бонусний продукт - можлива знижка 50%)</p>
+                <div class="desc">drink</div>
             </article>
         </div>
     </div>
@@ -624,58 +627,10 @@
             copyright
         </div>
     </footer>
-
-    <div id="order">
-        <div id="order-wrapper"></div>
-        <div id="close"><svg viewBox="0 0 24 24"><path d="M20 20L4 4m16 0L4 20"></path></svg></div>
-        <div id="form">
-
-            <div id="area">
-                <label id="lviv">
-                    <input type="radio" name="area" checked value="Львів"> Львів
-                </label>
-
-                <label id="not-lviv">
-                    <input type="radio" name="area" value="за Львовом"> за Львовом
-                </label>
-
-                <div id="minimal">Мінімальна сума замовлення: <span id="area-check">400</span></div>
-            </div>
-
-            <div id="goods"></div>
-
-            <div id="total-goods"></div>
-
-            <form>
-                <p>Оформити замовлення?</p>
-                <input type="text" name="name" placeholder="ім'я *" required id="form-name">
-                <input type="text" name="phone" placeholder="телефон *" required id="form-phone">
-                <textarea name="comment" placeholder="коментар" id="form-comment"></textarea>
-
-                <div id="discount">
-                    <label>
-                        <input type="radio" name="radio" checked> забрати самостійно (знижка 25%)
-                    </label>
-
-                    <label>
-                        <input type="radio" name="radio"> доставка
-                    </label>                    
-                </div>
-
-                <p>Оберіть час: </p>
-
-                <div id="range">
-                    <span id="range-span">10</span>
-                    <input type="range" min="10" max="21" value="10" id="range-input" name="form-range">
-                </div>
-
-                <button>Оформити замовлення</button>
-            </form>
-        </div>
-    </div>
-
+    
     <script src="//unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="js/fancybox.esm.js"></script>
-    <script src="js/script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+    <script src="js/app.js"></script>
 </body>
 </html>
