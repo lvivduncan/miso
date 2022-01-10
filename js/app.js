@@ -134,7 +134,7 @@ let discount = []
 // усі товари
 const products = document.querySelectorAll('.menu article')
 
-// check goods and show/hide basket
+// оновлюємо кошик (іконку в хедері)
 toggleBasket()
 
 // опрацьовуємо клік по товару
@@ -218,248 +218,97 @@ function toggleBasket(){
 }
 
 // start virtual DOM 
+let virtual = `
+<div id="order-wrapper"></div>
+<div id="close"></div>
+<div id="form">
+
+    <div id="area">
+        <label id="lviv">
+            <input type="radio" name="area" checked value="Львів"> Львів
+        </label>
+
+        <label id="not-lviv">
+            <input type="radio" name="area" value="за Львовом"> за Львовом
+        </label>
+
+        <div id="minimal">Мінімальна сума замовлення: <span id="area-check">400</span></div>
+    </div>
+
+    <div id="goods"></div>
+
+    <div id="total-goods"></div>
+
+    <form>
+        <p>Оформити замовлення?</p>
+        <input type="text" name="name" placeholder="ім'я *" required id="form-name">
+        <input type="text" name="phone" placeholder="телефон *" required id="form-phone">
+        <textarea name="comment" placeholder="коментар" id="form-comment"></textarea>
+
+        <div id="discount">
+            <label>
+                <input type="radio" name="radio" checked> забрати самостійно (знижка 25%)
+            </label>
+
+            <label>
+                <input type="radio" name="radio"> доставка
+            </label>
+        </div>
+
+        <p>Оберіть час: </p>
+
+        <div id="range">
+            <span id="range-span">10</span>
+            <input type="range" min="10" max="21" value="10" id="range-input" name="form-range">
+        </div>
+
+        <button>Оформити замовлення</button>
+    </form>
+</div>
+`
+
 basket.addEventListener('click', () => {
 
-    // основний блок
     const orderElement = element()
     orderElement.id = 'order'
+    orderElement.innerHTML = virtual
 
-    // враппер
-    const wrapperElement = element()
-    wrapperElement.id = 'order-wrapper'
-
-    // кнопка закриття
-    const closeButton = element()
-    closeButton.id = 'close'
-
-    // блок з формою та замовленими товарами
-    const formElement = element()
-    formElement.id = 'form'
-
-    // блок ареа -- куди буде доставка
-    const areaElement = element()
-    areaElement.id = 'area'
-
-    // обрали місто Львів
-    const areaLviv = element('label')
-    areaLviv.id = 'lviv'
-
-    // радіобокс Львів
-    const areaLvivInput = element('input')
-    areaLvivInput.type = 'radio'
-    areaLvivInput.name = 'area'
-    areaLvivInput.checked = true
-    areaLvivInput.value = 'Львів'
-
-    // назва Львів
-    const areaLvivSpan = element('span')
-    areaLvivSpan.innerText = 'Львів'
-
-    // обрали не Львів
-    const areaNotLviv = element('label')
-    areaNotLviv.id = 'not-lviv'
-
-    // радіобокс не Львів
-    const areaNotLvivInput = element('input')
-    areaNotLvivInput.type = 'radio'
-    areaNotLvivInput.name = 'area'
-    areaNotLvivInput.value = 'за Львовом'
-
-    // назва за Львовом
-    const areaNotLvivSpan = element('span')
-    areaNotLvivSpan.innerText = 'за Львовом'
-
-    // блок "мінімальна сума замовлння"
-    const minimal = element()
-    minimal.id = 'minimal'
-
-    // місце виводу мінімальної суми
-    const minimalSpan = element('span')
-    minimalSpan.id = 'area-check'
-    minimalSpan.textContent = '400'
-    
-    // блок гудс -- товари
-    const goodsElement = element()
-    goodsElement.id = 'goods'
-
-    // let goodsElementInner = element()
-
-
-    // блок тотал -- сума
-    const totalElement = element()
-    totalElement.id = 'total-goods'
-    totalElement.textContent = totalSum()
-
-    // блок form (форма з полями)
-    const form = element('form')
-    // показати форму, якщо замовлено більш ніж на 400
-    totalSum() > 400 && (form.className = 'active')
-
-    // заголовок
-    const formTitle = element('p')
-    formTitle.innerText = 'Оформити замовлення?'
-
-    // поле ім'я
-    const inputName = element('input')
-    inputName.type = 'text'
-    inputName.name = 'name'
-    inputName.placeholder = 'Ім`я *'
-    inputName.id = 'form-name'
-    inputName.required = true
-
-    // поле телефон
-    const inputPhone = element('input')
-    inputPhone.type = 'text'
-    inputPhone.name = 'phone'
-    inputPhone.placeholder = 'Телефон *'
-    inputPhone.id = 'form-phone'
-    inputPhone.required = true
-
-    // поле коментаря
-    const textarea = element('textarea')
-    textarea.name = 'comment'
-    textarea.placeholder = 'коментар'
-    textarea.id = 'form-comment'
-
-    // блок зі знижкою (якщо вона є)
-    const discountElement = element('discount')
-    discountElement.id = 'discount'
-
-    // 1 елемент блоку зі знижкою
-    const discountLabel1 = element('label')
-
-    const discountLabel1Input = element('input')
-    discountLabel1Input.type = 'radio'
-    discountLabel1Input.name = 'radio'
-    discountLabel1Input.checked = true
-
-    const discountLabel1Content = element('span')
-    discountLabel1Content.innerText = ' забрати самостійно (знижка 25%) '
-
-    // 2 елемент блоку зі знижкою
-    const discountLabel2 = element('label')
-
-    const discountLabel2Input = element('input')
-    discountLabel2Input.type = 'radio'
-    discountLabel2Input.name = 'radio'
-
-    const discountLabel2Content = element('span')
-    discountLabel2Content.innerText = ' доставка '
-
-    // блок час 
-    const formTime = element('p')
-    formTime.innerText = 'Оберіть час: '
-
-    // блок з вибором часу
-    const formRange = element()
-    formRange.id = 'range'
-
-    // число, яке показано при виборі часу
-    const formRangeSpan = element('span')
-    formRangeSpan.id = 'range-span'
-    formRangeSpan.innerText = '10'
-
-    // бігунок для вибору часу
-    const formRangeInput = element('input')
-    formRangeInput.type = 'range'
-    formRangeInput.min = '10'
-    formRangeInput.max = '21'
-    formRangeInput.value = '10'
-    formRangeInput.id = 'range-input'
-    formRangeInput.name = 'form-range'
-
-    // кнопка відправки
-    const formSendButton = element('button')
-    formSendButton.innerText = 'Оформити замовлення'
-
-    // 1. збираємо блок з вибором часу
-    formRange.append(formRangeSpan, formRangeInput) // + formTime
-
-    // 2. збираємо блок зі знижкою
-    discountLabel1.append(discountLabel1Input,discountLabel1Content)
-    discountLabel2.append(discountLabel2Input,discountLabel2Content)
-    discountElement.append(discountLabel1,discountLabel2)
-
-    // 3. збираємо форму
-    form.append(formTitle, inputName, inputPhone, textarea, discountElement, formTime, formRange, formSendButton)
-
-    // 4. areaElement
-    areaLviv.append(areaLvivInput, areaLvivSpan)
-    areaNotLviv.append(areaNotLvivInput, areaNotLvivSpan)
-    minimal.append('Мінімальна сума замовлення: ', minimalSpan)
-    areaElement.append(areaLviv, areaNotLviv, minimal)
-
-    // 5. goodsElement
-    goodsElement.append(goodsFromBase())
-    // goodsElementInner.append(goodsFromBase())
-
-    // 6. збираємо блок з даними
-    formElement.append(areaElement, goodsElement, totalElement, form)
-
-    // 7. збираємо все разом
-    orderElement.append(wrapperElement, closeButton, formElement)
-
-    // 8. global insert
     body.append(orderElement)
     body.classList.add('active')
 
-    //! тепер всі елементи є в DOM, 
-    //! можна з ними працювати напряму без евентів
-
     // маніпулюємо часом виготовлення або доставки
-    const rangeInput = document.getElementById('range-input')
-    const rangeSpan = document.getElementById('range-span')
-    rangeInput && rangeInput.addEventListener('input', () => {
+    $('#range-input') && $('#range-input').addEventListener('input', () => {
 
-        rangeSpan.innerText = rangeInput.value
+        $('#range-span').innerText = $('#range-input').value
     })
-
-    // видаляємо, клікнувши на клоз-батон
-    closeButton.addEventListener('click', removeForm)
-
-    // видаляємо, клікнувши на враппер
-    wrapperElement.addEventListener('click', removeForm)
     
     // видаляємо, натиснувши esc
     document.addEventListener('keydown', event => {
 
         if(event.key === 'Escape' || event.code === 'Escape'){
     
-            removeForm()
+            removeOrder()
         }
     })
 
-    // чЕкаємо місце доставки
-    document.querySelectorAll('#area input').forEach(item => {
+    // глобально цей елемент перекриває всю сторінку, тому можна ловити евенти на ньому, а не на document
+    orderElement.addEventListener('click', event => {
 
-        item.addEventListener('input', function() {
+        // видаляємо, клікнувши на клоз-батон
+        if(event.target.id === 'close') removeOrder()
 
-            // міняємо мінімальну суму замовлення
-            this.value === 'Львів' ? 
-                minimalSpan.textContent = '400' : 
-                minimalSpan.textContent = '600'
+        // видаляємо, клікнувши на враппер
+        if(event.target.id === 'order-wrapper') removeOrder()
 
-            // показати/сховати форму
-            toggleForm()
-        })
-    })
+        // todo: якщо сума замовлення більша за мінімальну -- показати форму
+        // toggleForm()
 
-
-
-    // todo: баг, якщо закрити форму -- замовлення дублюються
-    // todo: припускаю -- потрібно оновити 3 масиви
-
-
-    // видаляємо товари з форми замовлення
-    document.addEventListener('click', event => {
-
-        // якщо у базі ніц немає, то і кнопок не існує
+        // видаляємо/додаємо товари (форма замовлення)
         if(event.target.className === 'minus'){
             
             names = JSON.parse(localStorage.getItem('names')).split(';')
             prices = JSON.parse(localStorage.getItem('prices')).split(';')
-            discount = JSON.parse(localStorage.getItem('discount')).split(';')
-            // localStorage.setItem('discount', JSON.stringify(discount.join(';')))  
+            discount = JSON.parse(localStorage.getItem('discount')).split(';') 
     
             // отримуємо парента та його айдішку
             const id = event.target.parentNode.id
@@ -469,12 +318,13 @@ basket.addEventListener('click', () => {
                 // очистка бази
                 localStorage.clear()            
                 
-                //
-                // todo: якщо 1 елемент, видалити і закрити кошик
+                // якщо 1 елемент, видалити і закрити кошик
+                removeOrder()
                 
-                //
+                // оновлюємо кошик (іконку в хедері)
                 toggleBasket()
                 
+                // глобальна очистка
                 names = []
                 prices = []
                 discount = []
@@ -493,18 +343,17 @@ basket.addEventListener('click', () => {
                 localStorage.setItem('prices', JSON.stringify(prices.join(';'))) 
                 localStorage.setItem('discount', JSON.stringify(discount.join(';'))) 
     
+                // оновлюємо кошик (іконку в хедері)
                 toggleBasket()
     
-                // test:
-                goodsElement.innerHTML = ''
-                goodsElement.append(goodsFromBase())
-                // goodsElementInner.remove()
-                // goodsElementInner = element()
-                // goodsElement.append(goodsElementInner)
-                // goodsElementInner.append(goodsFromBase())
+                // оновлюємо список товарів
+                $('#goods').innerHTML = viewGoods()
                     
                 // показати/сховати форму
                 toggleForm()
+
+                // оновлюємо суму замовлення по кожному кліку
+                $('#total-goods').innerHTML = totalSum()
             }
             
         } else if(event.target.className === 'plus'){
@@ -530,33 +379,63 @@ basket.addEventListener('click', () => {
             localStorage.setItem('prices', JSON.stringify(prices.join(';')))
             localStorage.setItem('discount', JSON.stringify(discount.join(';')))
 
-            // test:
-            goodsElement.innerHTML = ''
-            goodsElement.append(goodsFromBase())
-            // goodsElementInner.remove()
-            // goodsElementInner = element()
-            // goodsElement.append(goodsElementInner)
-            // goodsElementInner.append(goodsFromBase())
-    
+            // оновлюємо кошик (іконку в хедері)
+            toggleBasket()
+
+            // оновлюємо список товарів
+            $('#goods').innerHTML = viewGoods()
+
             // показати/сховати форму
             toggleForm()
+
+            // оновлюємо суму замовлення по кожному кліку
+            $('#total-goods').innerHTML = totalSum()
     
         } else if(event.target.id === 'range-input'){
     
             const range = event.target
         
-            const span = document.getElementById('range-span')
-        
             range.addEventListener('input', () => {
         
-                span.innerText = range.value
+                $('#range-span').innerText = range.value
             })
         }
 
-        // оновлюємо суму замовлення по кожному кліку
-        totalElement.textContent = totalSum()
+
+
+
+
+
+
+
+
+
+
 
     })
+
+    // чЕкаємо місце доставки
+    $$('#area input').forEach(item => {
+
+        item.addEventListener('input', function() {
+
+            // міняємо мінімальну суму замовлення
+            this.value === 'Львів' ? 
+                $('#area-check').textContent = '400' : 
+                $('#area-check').textContent = '600'
+
+            // показати/сховати форму
+            toggleForm()
+        })
+    })
+
+    // Всього (сума в гривнях)
+    $('#total-goods').innerHTML = totalSum()
+
+    // Список товарів
+    $('#goods').innerHTML = viewGoods()
+
+
 
 
 
@@ -572,44 +451,34 @@ basket.addEventListener('click', () => {
 // end virtual DOM
 
 // видаляємо модальне вікно
-function removeForm(){
+function removeOrder(){
     body.classList.remove('active')
     document.getElementById('order').remove()
 }
 
-// створюємо ДОМ-елемент
+// створюємо ДОМ-елемент (todo: перевірити чи доцільно)
 function element(tag = 'div'){
     return document.createElement(tag)
 }
 
-// отримуємо дані з бази, обробляємо і вставляємо в блок #goods > ul
-function goodsFromBase(){
-
+// виводимо товари списком у формі оформлення замовлення
+function viewGoods(){
     names = JSON.parse(localStorage.getItem('names')).split(';')
     prices = JSON.parse(localStorage.getItem('prices')).split(';')
 
-    const ul = element('ul')
-    
+    let output = ''
+
     for(let i = 0; i<names.length; i++){
-        
-        const li = element('li')
-        li.id = i
 
-        const minus = element()
-        minus.className = 'minus'
-
-        const plus = element()
-        plus.className = 'plus'
-
-        const priceElement = element('span')
-        priceElement.innerText = prices[i]
-        
-        li.append(minus, names[i], priceElement, plus)
-
-        ul.append(li)
+        output += `
+        <li id="${i}">
+            <div class="minus"></div>
+            ${names[i]} <span>${prices[i]}</span>
+            <div class="plus"></div>
+        <li>`
     }
 
-    return ul
+    return `<ul>${output}</ul>`
 }
 
 // загальна сума замовлення
@@ -623,12 +492,10 @@ function totalSum(){
 // показуємо/ховаємо форму залежно від суми
 function toggleForm(){
 
-    const form = document.querySelector('form')
-    const areaCheck = document.getElementById('area-check')
-
-    areaCheck && (totalSum() >= areaCheck.textContent ? 
-        form.classList.add('active') : 
-        form.classList.remove('active'))
+    // показати форму коли сума більша мінімальної
+    $('#area-check') && (totalSum() >= $('#area-check').textContent ? 
+        $('form').classList.add('active') : 
+        $('form').classList.remove('active'))
 }
 
 
@@ -643,6 +510,14 @@ function toggleForm(){
 
 
 
+// скорочений варіант document.querySelector()
+function $(selector) {
+    return document.querySelector(selector)
+}
 
+// ... і document.querySelectorAll()
+function $$(selector) {
+    return document.querySelectorAll(selector)
+}
 
 // end
