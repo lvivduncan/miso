@@ -632,8 +632,8 @@ basket.addEventListener('click', () => {
             // очистка бази
             localStorage.clear()            
 
-            // якщо 1 елемент, видалити і закрити кошик
-            hideOrderForm()
+            removeOrder()
+            // hideOrderForm()
             toggleBasket()
             
             names = []
