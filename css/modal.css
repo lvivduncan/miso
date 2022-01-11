@@ -85,8 +85,9 @@
 #range
 {
     color: var(--white);
-    display: flex;
     align-items: center;
+    display: grid;
+    grid-template-columns: 40px 1fr;
     gap: calc(var(--gap)/2)
 }
 

@@ -164,7 +164,8 @@ for(let i = 0; i < products.length; i++){
             // особливий товар
             if(product.classList.contains('discount')){
 
-                discount.push(product.querySelector('.desc').textContent)
+                // додаємо його ціну до відповідного масиву, з якого і будемо вираховувати знижку
+                discount.push(product.querySelector('header span').textContent)
             } else {
 
                 discount.push(0)
@@ -186,7 +187,8 @@ for(let i = 0; i < products.length; i++){
             // особливий товар
             if(product.classList.contains('discount')){
 
-                discount.push(product.querySelector('.desc').textContent)
+                // додаємо його ціну до відповідного масиву, з якого і будемо вираховувати знижку
+                discount.push(product.querySelector('header span').textContent)
             } else {
 
                 discount.push(0)
@@ -218,7 +220,7 @@ function toggleBasket(){
 }
 
 // start virtual DOM 
-let virtual = `
+let order = `
 <div id="order-wrapper"></div>
 <div id="close"></div>
 <div id="form">
@@ -232,28 +234,29 @@ let virtual = `
             <input type="radio" name="area" value="за Львовом"> за Львовом
         </label>
 
-        <div id="minimal">Мінімальна сума замовлення: <span id="area-check">400</span></div>
+        <div id="minimal">Мінімальна сума замовлення (з доставкою): <span id="area-check">400</span>. <br> Без доставки сума може бути будь-яка.</div>
     </div>
 
     <div id="goods"></div>
 
     <div id="total-goods"></div>
 
-    <form>
+    <form class="active">
         <p>Оформити замовлення?</p>
+
+        <div id="discount">
+            <label id="discount-delivery">
+                <input type="radio" name="radio" checked> доставка
+            </label>
+
+            <label id="discount-without-delivery">
+                <input type="radio" name="radio"> забрати самостійно <span></span>
+            </label>
+        </div>
+
         <input type="text" name="name" placeholder="ім'я *" required id="form-name">
         <input type="text" name="phone" placeholder="телефон *" required id="form-phone">
         <textarea name="comment" placeholder="коментар" id="form-comment"></textarea>
-
-        <div id="discount">
-            <label>
-                <input type="radio" name="radio" checked> забрати самостійно (знижка 25%)
-            </label>
-
-            <label>
-                <input type="radio" name="radio"> доставка
-            </label>
-        </div>
 
         <p>Оберіть час: </p>
 
@@ -269,9 +272,9 @@ let virtual = `
 
 basket.addEventListener('click', () => {
 
-    const orderElement = element()
+    const orderElement = document.createElement('div')
     orderElement.id = 'order'
-    orderElement.innerHTML = virtual
+    orderElement.innerHTML = order
 
     body.append(orderElement)
     body.classList.add('active')
@@ -290,6 +293,14 @@ basket.addEventListener('click', () => {
             removeOrder()
         }
     })
+
+    // якщо є дискаунтний товар -- показати блок щодо знижки
+    toggleDiscount()
+
+    // todo: якщо ... показати блок, що є знижка на фреш-соки
+
+    // якщо сума замовлення більше 400 -- одразу показати форму оформлення
+    totalSum() > 400 && ($('form').className = 'active')
 
     // глобально цей елемент перекриває всю сторінку, тому можна ловити евенти на ньому, а не на document
     orderElement.addEventListener('click', event => {
@@ -350,12 +361,16 @@ basket.addEventListener('click', () => {
                 $('#goods').innerHTML = viewGoods()
                     
                 // показати/сховати форму
-                toggleForm()
+                // toggleForm()
 
                 // оновлюємо суму замовлення по кожному кліку
                 $('#total-goods').innerHTML = totalSum()
+
+                // якщо є дискаунтний товар -- показати блок щодо знижки
+                toggleDiscount()
             }
             
+        // дублюємо замовлені товари
         } else if(event.target.className === 'plus'){
             
             names = JSON.parse(localStorage.getItem('names')).split(';')
@@ -386,11 +401,15 @@ basket.addEventListener('click', () => {
             $('#goods').innerHTML = viewGoods()
 
             // показати/сховати форму
-            toggleForm()
+            // toggleForm()
 
             // оновлюємо суму замовлення по кожному кліку
             $('#total-goods').innerHTML = totalSum()
+
+            // якщо є дискаунтний товар -- показати блок щодо знижки
+            toggleDiscount()
     
+        // обираємо час доставки/забирання
         } else if(event.target.id === 'range-input'){
     
             const range = event.target
@@ -399,18 +418,19 @@ basket.addEventListener('click', () => {
         
                 $('#range-span').innerText = range.value
             })
+
+        // обираємо варіант: доставка/забрати самостійно
+        } else if(event.target.id === 'discount-delivery'){
+        
+            console.log('discount-delivery')
+            $('#total-goods').innerText = totalSum()
+            
+        // обираємо варіант: доставка/забрати самостійно
+        } else if(event.target.id === 'discount-without-delivery'){
+            
+            console.log('discount-without-delivery')
+            $('#total-goods').innerText = totalSum() - totalSumDiscount()/100*25
         }
-
-
-
-
-
-
-
-
-
-
-
 
     })
 
@@ -425,7 +445,7 @@ basket.addEventListener('click', () => {
                 $('#area-check').textContent = '600'
 
             // показати/сховати форму
-            toggleForm()
+            // toggleForm()
         })
     })
 
@@ -434,18 +454,6 @@ basket.addEventListener('click', () => {
 
     // Список товарів
     $('#goods').innerHTML = viewGoods()
-
-
-
-
-
-
-
-
-
-
-
-
 
 })
 // end virtual DOM
@@ -456,10 +464,10 @@ function removeOrder(){
     document.getElementById('order').remove()
 }
 
-// створюємо ДОМ-елемент (todo: перевірити чи доцільно)
-function element(tag = 'div'){
-    return document.createElement(tag)
-}
+// // створюємо ДОМ-елемент (todo: перевірити чи доцільно)
+// function element(tag = 'div'){
+//     return document.createElement(tag)
+// }
 
 // виводимо товари списком у формі оформлення замовлення
 function viewGoods(){
@@ -489,26 +497,34 @@ function totalSum(){
     return prices.reduce((sum,item) => sum += +item, 0)
 }
 
-// показуємо/ховаємо форму залежно від суми
-function toggleForm(){
+// загальна сума товарів зі знижкою
+function totalSumDiscount(){
 
-    // показати форму коли сума більша мінімальної
-    $('#area-check') && (totalSum() >= $('#area-check').textContent ? 
-        $('form').classList.add('active') : 
-        $('form').classList.remove('active'))
+    discount = JSON.parse(localStorage.getItem('discount')).split(';')
+
+    return discount.reduce((sum,item) => sum += +item, 0)
 }
 
+// // показуємо/ховаємо форму залежно від суми
+// function toggleForm(){
 
+//     // показати форму коли сума більша мінімальної
+//     $('#area-check') && (totalSum() >= $('#area-check').textContent ? 
+//         $('form').classList.add('active') : 
+//         $('form').classList.remove('active'))
+// }
 
+// показуємо/ховаємо блок з пропозицією забрати самому
+function toggleDiscount(){
+    if(totalSumDiscount() > 0){
 
-
-
-
-
-
-
-
-
+        $('#discount').classList.add('active')
+        $('#discount span').innerText = totalSumDiscount()/100*25
+    } else {
+        
+        $('#discount').classList.remove('active')
+    }
+}
 
 // скорочений варіант document.querySelector()
 function $(selector) {

@@ -8,6 +8,7 @@
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: var(--gap);
+    align-items: flex-start;
 }
 
 @media(max-width:776px)
@@ -127,9 +128,26 @@
 .menu p
 {
     grid-area: menu-p;
+
     color: var(--black);
     font-weight: 300;
     font-size: 18px;
+    display: flex;
+    gap: (--gap);
+}
+
+.menu p s
+{
+    display: block;
+    white-space: nowrap;
+    color: var(--orange);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.menu p s::after
+{
+    content: ' грн';
 }
 
 .menu picture
@@ -144,12 +162,4 @@
     {
         margin: var(--gap100) 0;
     }    
-}
-
-/* ////////////////////////////////////////////
-// прихований блок, містить дані щодо знижки //
-//////////////////////////////////////////// */
-.menu .desc
-{
-    display: none;
 }

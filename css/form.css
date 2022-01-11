@@ -331,5 +331,22 @@ label
 
 #discount.active
 {
-    display: block;
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap) 0;
+}
+
+#discount span
+{
+    pointer-events: none;
+}
+
+#discount span::before
+{
+    content: '- '
+}
+
+#discount span::after
+{
+    content: ' грн'
 }
