@@ -19,7 +19,9 @@ window.addEventListener('scroll', () => {
 // плавний скрол
 // https://webdesign.tutsplus.com/tutorials/smooth-scrolling-vanilla-javascript--cms-35165
 {
-    const links = document.querySelectorAll("#banner ul a")
+    const links = $$("#banner ul a")
+
+    $('#menu').addEventListener("click", clickHandler)
 
     for (const link of links) {
         link.addEventListener("click", clickHandler)
@@ -100,7 +102,7 @@ window.addEventListener('scroll', () => {
 }())
 
 // додав альти 
-document.querySelectorAll('.leaflet-zoom-animated').forEach(item => item.setAttribute('alt', ''))
+$$('.leaflet-zoom-animated').forEach(item => item.setAttribute('alt', ''))
 
 /* ///////////
 // телефони //
@@ -151,7 +153,7 @@ $('#phone').addEventListener('click', () => {
 /* ///////
 // menu //
 /////// */
-
+/* 
 const cloneMenu = $('#banner ul').cloneNode(true)
 
 $('#menu').addEventListener('click', () => {
@@ -193,7 +195,7 @@ $('#menu').addEventListener('click', () => {
     })
 
 })
-
+ */
 /* ////////////////////////////
 // Політика конфіденційності //
 //////////////////////////// */
