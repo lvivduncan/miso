@@ -550,13 +550,11 @@ basket.addEventListener('click', () => {
         // обираємо варіант: доставка/забрати самостійно
         } else if(event.target.id === 'discount-delivery'){
         
-            console.log('discount-delivery')
             $('#total-goods').innerText = totalSum()
             
         // обираємо варіант: доставка/забрати самостійно
         } else if(event.target.id === 'discount-without-delivery'){
             
-            console.log('discount-without-delivery')
             $('#total-goods').innerText = totalSum() - totalSumDiscount()/100*25
         }
 
@@ -604,10 +602,11 @@ basket.addEventListener('click', () => {
         // const formData = new FormData(this)
         const param = new URLSearchParams()
 
-        const form_name = document.getElementById('form-name').value
-        const form_phone = document.getElementById('form-phone').value
-        const form_comment = document.getElementById('form-comment').value
-        const form_range = document.getElementById('range-input').value
+        const form_name = $('#form-name').value
+        const form_phone = $('#form-phone').value
+        const form_comment = $('#form-comment').value
+        const form_range = $('range-input').value
+        const discount_without_delivery = $('#discount-without-delivery').value
 
         // order goods
         param.append('goods', names)
@@ -617,6 +616,7 @@ basket.addEventListener('click', () => {
         param.append('phone', form_phone)
         param.append('comment', form_comment)
         param.append('range', form_range)
+        param.append('discount_without_delivery', discount_without_delivery)
 
         let response = await fetch('https://miso.lviv.ua/mail/send.php', {
 
@@ -716,15 +716,6 @@ function totalSumDiscount(){
 
     return discount.reduce((sum,item) => sum += +item, 0)
 }
-
-// // показуємо/ховаємо форму залежно від суми
-// function toggleForm(){
-
-//     // показати форму коли сума більша мінімальної
-//     $('#area-check') && (totalSum() >= $('#area-check').textContent ? 
-//         $('form').classList.add('active') : 
-//         $('form').classList.remove('active'))
-// }
 
 // показуємо/ховаємо блок з пропозицією забрати самому
 function toggleDiscount(){
