@@ -10,3 +10,9 @@
     text-align: center;
     padding: 5px;
 }
+
+#copy a
+{
+    color: var(--gray);
+    text-decoration: underline;
+}

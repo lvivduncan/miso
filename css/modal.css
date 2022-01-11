@@ -3,6 +3,19 @@
 // модальне меню // 
 //////////////// */
 
+#modal
+{
+    padding: var(--gap);
+    border-radius: 3px;
+    box-shadow: 0 0 5px 5px rgb(0 0 0 / 50%);
+    position: relative;
+    z-index: 1070;
+    width: 95%;
+    margin: auto;
+
+    background: var(--white);
+}
+
 #modal ul
 {
     display: grid;
@@ -23,6 +36,14 @@
     #modal ul
     {
         grid-template-columns: repeat(2,1fr);
+    }    
+}
+
+@media(max-width:450px)
+{
+    #modal ul
+    {
+        grid-template-columns: 1fr;
     }    
 }
 
@@ -49,6 +70,27 @@
 /* ////////////////////
 // мобільні телефони //
 //////////////////// */
+#call
+{
+    padding: var(--gap);
+    border-radius: 3px;
+    box-shadow: 0 0 5px 5px rgb(0 0 0 / 50%);
+    position: relative;
+    z-index: 1070;
+    width: 280px;
+    margin: auto;
+
+    background: var(--white);
+}
+
+@media(max-width:320px)
+{
+    #call
+    {
+        width: 95%;
+    }    
+}
+
 #call ul,
 #call li 
 {
@@ -82,6 +124,7 @@
     fill: var(--orange)
 }
 
+/* це до форми стосується */
 #range
 {
     color: var(--white);
@@ -94,4 +137,21 @@
 #range span::after
 {
     content: ':00';
+}
+
+/* ////////////////////////////
+// політика конфіденційності //
+//////////////////////////// */
+
+#terms-and-condition
+{
+    padding: var(--gap);
+    border-radius: 3px;
+    box-shadow: 0 0 5px 5px rgb(0 0 0 / 50%);
+    position: relative;
+    z-index: 1070;
+    width: 95%;
+    margin: auto;
+
+    background: var(--white);
 }
