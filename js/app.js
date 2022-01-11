@@ -469,7 +469,7 @@ basket.addEventListener('click', () => {
                 discount = []
                 
                 // знімаємо відмітку з усіх активних товарів
-                for(let i = 0; i < articles.length; i++) articles[i].classList.remove('active')
+                for(let i = 0; i < products.length; i++) products[i].classList.remove('active')
     
             } else {
                 
@@ -582,6 +582,90 @@ basket.addEventListener('click', () => {
 
     // Список товарів
     $('#goods').innerHTML = viewGoods()
+
+
+
+
+
+
+
+/* ////////////////////////
+// оформлення замовлення //
+//////////////////////// */
+
+// const formElem = document.querySelector('#form form')
+
+// console.log(formElem)
+
+    $('#form form').onsubmit = async function(event) {
+
+        event.preventDefault()
+
+        // const formData = new FormData(this)
+        const param = new URLSearchParams()
+
+        const form_name = document.getElementById('form-name').value
+        const form_phone = document.getElementById('form-phone').value
+        const form_comment = document.getElementById('form-comment').value
+        const form_range = document.getElementById('range-input').value
+
+        // order goods
+        param.append('goods', names)
+        param.append('prices', totalSum())
+
+        param.append('name', form_name)
+        param.append('phone', form_phone)
+        param.append('comment', form_comment)
+        param.append('range', form_range)
+
+        let response = await fetch('https://miso.lviv.ua/mail/send.php', {
+
+            method: 'POST',
+            body: param
+        })
+
+        let result = await response.text()
+
+        // успішна відправка
+        if(result == 'ok'){
+
+            // очистка бази
+            localStorage.clear()            
+
+            // якщо 1 елемент, видалити і закрити кошик
+            hideOrderForm()
+            toggleBasket()
+            
+            names = []
+            prices = []
+            
+            // очищаємо всі активні товари
+            for(let i = 0; i < products.length; i++) products[i].classList.remove('active')
+
+            let ok
+
+            setTimeout(() => {
+                
+                ok = new Fancybox([
+                    {
+                        src: '<p>Усе гаразд! Замовлення надіслано!</p>',
+                        type: "html",
+                    },
+                ])
+
+            }, 1000)
+
+            setTimeout(() => {
+                
+                ok.close()
+
+            }, 2000)
+        } else {
+
+            console.error(error)
+        }
+
+    }
 
 })
 // end virtual DOM
