@@ -607,7 +607,7 @@ basket.addEventListener('click', () => {
         const form_name = $('#form-name').value
         const form_phone = $('#form-phone').value
         const form_comment = $('#form-comment').value
-        const form_range = $('range-input').value
+        const form_range = $('#range-input').value
         const discount_without_delivery = $('#discount-without-delivery').value
 
         // order goods
