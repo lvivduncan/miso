@@ -624,7 +624,6 @@ basket.addEventListener('click', () => {
         param.append('comment', form_comment)
         param.append('range', form_range)
         param.append('discount', discount_without_delivery)
-        param.append('discount_input', discount_input)
 
         let response = await fetch('https://miso.lviv.ua/mail/send.php', {
 
