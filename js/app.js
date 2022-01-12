@@ -607,7 +607,13 @@ basket.addEventListener('click', () => {
         const form_phone = $('#form-phone').value
         const form_comment = $('#form-comment').value
         const form_range = $('#range-input').value
-        const discount_without_delivery = $('#discount-without-delivery span').textContent
+
+        let discount_without_delivery = 0;
+
+        if($('#discount-without-delivery input').checked === true){
+
+            discount_without_delivery = $('#discount-without-delivery span').textContent
+        }
 
         // order goods
         param.append('goods', names)
@@ -618,6 +624,7 @@ basket.addEventListener('click', () => {
         param.append('comment', form_comment)
         param.append('range', form_range)
         param.append('discount', discount_without_delivery)
+        param.append('discount_input', discount_input)
 
         let response = await fetch('https://miso.lviv.ua/mail/send.php', {
 
