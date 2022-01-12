@@ -659,7 +659,7 @@ basket.addEventListener('click', () => {
             setTimeout(() => {
                 
                 ok.close()
-                window.location.href
+                location.reload()
 
             }, 2000)
         } else {
