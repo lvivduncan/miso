@@ -53,7 +53,7 @@ window.addEventListener('scroll', () => {
             // elements
             let li = ul.querySelectorAll('li')
 
-            // if less than 4, cloned 
+            // if less than 4, cloned
             if (li.length <= 3) {
 
                 // cloned and append elements
@@ -65,22 +65,22 @@ window.addEventListener('scroll', () => {
 
             setInterval(() => {
                 const ul = item.querySelector('ul')
-    
+
                 // move first element
                 const first = ul.firstElementChild
                 ul.append(first)
-    
+
                 // destroy transition
                 ul.style.transition = 'none'
                 ul.classList.add('to-left')
-    
+
                 setTimeout(() => {
 
                     ul.classList.remove('to-left')
                     ul.style.transition = '.5s'
 
                 }, 50)
-             
+
             }, 7000)
 
         })
@@ -101,7 +101,7 @@ window.addEventListener('scroll', () => {
     return map
 }())
 
-// додав альти 
+// додав альти
 $$('.leaflet-zoom-animated').forEach(item => item.setAttribute('alt', ''))
 
 /* ///////////
@@ -133,7 +133,7 @@ $('#phone').addEventListener('click', () => {
     document.addEventListener('keydown', event => {
 
         if(event.key === 'Escape' || event.code === 'Escape'){
-    
+
             removeOrder()
         }
     })
@@ -150,52 +150,6 @@ $('#phone').addEventListener('click', () => {
 
 })
 
-/* ///////
-// menu //
-/////// */
-/* 
-const cloneMenu = $('#banner ul').cloneNode(true)
-
-$('#menu').addEventListener('click', () => {
-
-    const orderWrapper = element()
-    orderWrapper.id = 'order-wrapper'
-
-    const close = element()
-    close.id = 'close'
-
-    const menuMobile = element()
-    menuMobile.id = 'modal'
-
-    menuMobile.append(cloneMenu)
-
-    const menuElement = element()
-    menuElement.id = 'order'
-    menuElement.append(orderWrapper, close, menuMobile)
-
-    body.append(menuElement)
-    body.classList.add('active')
-
-    document.addEventListener('keydown', event => {
-
-        if(event.key === 'Escape' || event.code === 'Escape'){
-    
-            removeOrder()
-        }
-    })
-
-    // закриваємо модальне вікно
-    menuElement.addEventListener('click', event => {
-
-        // видаляємо, клікнувши на клоз-батон
-        if(event.target.id === 'close') removeOrder()
-
-        // видаляємо, клікнувши на враппер
-        if(event.target.id === 'order-wrapper') removeOrder()
-    })
-
-})
- */
 /* ////////////////////////////
 // Політика конфіденційності //
 //////////////////////////// */
@@ -224,7 +178,7 @@ $('#terms').addEventListener('click', event => {
     document.addEventListener('keydown', event => {
 
         if(event.key === 'Escape' || event.code === 'Escape'){
-    
+
             removeOrder()
         }
     })
@@ -257,9 +211,18 @@ const basketSpan = basket.querySelector('span')
 ///////////////////////// */
 
 // об'єкти для даних, що будуть писатися у базу
+// назва
 let names = []
+
+// вартість
 let prices = []
+
+// знижка
 let discount = []
+
+// додаткові інгредієнти
+let add1 = []
+let add2 = []
 
 // усі товари
 const products = document.querySelectorAll('.menu article')
@@ -284,6 +247,8 @@ for(let i = 0; i < products.length; i++){
             names = JSON.parse(localStorage.getItem('names')).split(';')
             prices = JSON.parse(localStorage.getItem('prices')).split(';')
             discount = JSON.parse(localStorage.getItem('discount')).split(';')
+            add1 = JSON.parse(localStorage.getItem('add1')).split(';')
+            add2 = JSON.parse(localStorage.getItem('add2')).split(';')
 
             // додаємо назву
             names.push(product.querySelector('h1').textContent)
@@ -301,10 +266,29 @@ for(let i = 0; i < products.length; i++){
                 discount.push(0)
             }
 
+            let group1 = ''
+            // 1 group
+            if(product.querySelector('.first-group')){
+
+                group1 = product.querySelector('.first-group li').textContent
+            }
+
+            let group2 = ''
+            if(product.querySelector('.second-group')){
+
+                group2 = product.querySelector('.second-group li') .textContent
+            }
+
+            // додаткові дані
+            add1.push(group1)
+            add2.push(group2)
+
             // пишемо у базу
             localStorage.setItem('names', JSON.stringify(names.join(';')))
-            localStorage.setItem('prices', JSON.stringify(prices.join(';')))           
-            localStorage.setItem('discount', JSON.stringify(discount.join(';')))           
+            localStorage.setItem('prices', JSON.stringify(prices.join(';')))
+            localStorage.setItem('discount', JSON.stringify(discount.join(';')))
+            localStorage.setItem('add1', JSON.stringify(add1.join(';')))
+            localStorage.setItem('add2', JSON.stringify(add2.join(';')))
 
         } else {
 
@@ -324,10 +308,29 @@ for(let i = 0; i < products.length; i++){
                 discount.push(0)
             }
 
+            let group1 = ''
+            // 1 group
+            if(product.querySelector('.first-group')){
+
+                group1 = product.querySelector('.first-group li').textContent
+            }
+
+            let group2 = ''
+            if(product.querySelector('.second-group')){
+
+                group2 = product.querySelector('.second-group li') .textContent
+            }
+
+            // додаткові дані
+            add1.push(group1)
+            add2.push(group2)
+
             // пишемо у базу
             localStorage.setItem('names', JSON.stringify(names.join(';')))
-            localStorage.setItem('prices', JSON.stringify(prices.join(';'))) 
-            localStorage.setItem('discount', JSON.stringify(discount.join(';')))       
+            localStorage.setItem('prices', JSON.stringify(prices.join(';')))
+            localStorage.setItem('discount', JSON.stringify(discount.join(';')))
+            localStorage.setItem('add1', JSON.stringify(add1.join(';')))
+            localStorage.setItem('add2', JSON.stringify(add2.join(';')))
         }
 
         toggleBasket()
@@ -339,33 +342,23 @@ for(let i = 0; i < products.length; i++){
 function toggleBasket(){
 
     // показати/сховати кошик
-    localStorage.getItem('names') ? 
-        basket.classList.add('active') : 
+    localStorage.getItem('names') ?
+        basket.classList.add('active') :
         basket.classList.remove('active')
 
     // кількість товарів
-    localStorage.getItem('names') ? 
-        basketSpan.innerText = JSON.parse(localStorage.getItem('prices')).split(';').length : 
-        basketSpan.innerText = ''    
+    localStorage.getItem('names') ?
+        basketSpan.innerText = JSON.parse(localStorage.getItem('prices')).split(';').length :
+        basketSpan.innerText = ''
 }
 
-// start virtual DOM 
+// start virtual DOM
 const order = `
 <div id="order-wrapper"></div>
 <div id="close"></div>
 <div id="form">
 
-    <div id="area">
-        <label id="lviv">
-            <input type="radio" name="area" checked value="Львів"> Львів
-        </label>
-
-        <label id="not-lviv">
-            <input type="radio" name="area" value="за Львовом"> за Львовом
-        </label>
-
-        <div id="minimal">Мінімальна сума замовлення (з доставкою): <span id="area-check">400</span>. <br> Без доставки сума може бути будь-яка.</div>
-    </div>
+    <div class="notice">Мінімальна сума замовлення у межах міста (з доставкою) 400 гривень, доставка за межі міста від 600 гривень.</div>
 
     <div id="goods"></div>
 
@@ -388,13 +381,6 @@ const order = `
         <input type="text" name="phone" placeholder="телефон *" required id="form-phone">
         <textarea name="comment" placeholder="коментар" id="form-comment"></textarea>
 
-        <p>Оберіть час: </p>
-
-        <div id="range">
-            <span id="range-span">10</span>
-            <input type="range" min="10" max="21" value="10" id="range-input" name="form-range">
-        </div>
-
         <button>Оформити замовлення</button>
     </form>
 </div>
@@ -414,12 +400,12 @@ basket.addEventListener('click', () => {
 
         $('#range-span').innerText = $('#range-input').value
     })
-    
+
     // видаляємо, натиснувши esc
     document.addEventListener('keydown', event => {
 
         if(event.key === 'Escape' || event.code === 'Escape'){
-    
+
             removeOrder()
         }
     })
@@ -446,50 +432,52 @@ basket.addEventListener('click', () => {
 
         // видаляємо/додаємо товари (форма замовлення)
         if(event.target.className === 'minus'){
-            
+
             names = JSON.parse(localStorage.getItem('names')).split(';')
             prices = JSON.parse(localStorage.getItem('prices')).split(';')
-            discount = JSON.parse(localStorage.getItem('discount')).split(';') 
-    
+            discount = JSON.parse(localStorage.getItem('discount')).split(';')
+
             // отримуємо парента та його айдішку
             const id = event.target.parentNode.id
-    
+
             if(names.length === 1){
-    
+
                 // очистка бази
-                localStorage.clear()            
-                
+                localStorage.clear()
+
                 // якщо 1 елемент, видалити і закрити кошик
                 removeOrder()
-                
+
                 // оновлюємо кошик (іконку в хедері)
                 toggleBasket()
-                
+
                 // глобальна очистка
                 names = []
                 prices = []
                 discount = []
-                
+                add1 = []
+                add2 = []
+
                 // знімаємо відмітку з усіх активних товарів
                 for(let i = 0; i < products.length; i++) products[i].classList.remove('active')
-    
+
             } else {
-                
+
                 // якщо їх більше 1, видалити означений, перезаписати базу
                 names.splice(id, 1)
                 prices.splice(id, 1)
                 discount.splice(id, 1)
-    
+
                 localStorage.setItem('names', JSON.stringify(names.join(';')))
-                localStorage.setItem('prices', JSON.stringify(prices.join(';'))) 
-                localStorage.setItem('discount', JSON.stringify(discount.join(';'))) 
-    
+                localStorage.setItem('prices', JSON.stringify(prices.join(';')))
+                localStorage.setItem('discount', JSON.stringify(discount.join(';')))
+
                 // оновлюємо кошик (іконку в хедері)
                 toggleBasket()
-    
+
                 // оновлюємо список товарів
                 $('#goods').innerHTML = viewGoods()
-                    
+
                 // показати/сховати форму
                 // toggleForm()
 
@@ -499,26 +487,26 @@ basket.addEventListener('click', () => {
                 // якщо є дискаунтний товар -- показати блок щодо знижки
                 toggleDiscount()
             }
-            
+
         // дублюємо замовлені товари
         } else if(event.target.className === 'plus'){
-            
+
             names = JSON.parse(localStorage.getItem('names')).split(';')
             prices = JSON.parse(localStorage.getItem('prices')).split(';')
             discount = JSON.parse(localStorage.getItem('discount')).split(';')
-    
+
             // отримуємо парента та його айдішку
             const id = event.target.parentNode.id
-    
+
             // отримуємо елемент
             const copyName = names[id]
             const copyPrice = prices[id]
             const copyDiscount = discount[id]
-    
+
             names.push(copyName)
             prices.push(copyPrice)
             discount.push(copyDiscount)
-    
+
             // додати у базу копію
             localStorage.setItem('names', JSON.stringify(names.join(';')))
             localStorage.setItem('prices', JSON.stringify(prices.join(';')))
@@ -538,44 +526,44 @@ basket.addEventListener('click', () => {
 
             // якщо є дискаунтний товар -- показати блок щодо знижки
             toggleDiscount()
-    
-        // обираємо час доставки/забирання
-        } else if(event.target.id === 'range-input'){
-    
-            const range = event.target
-        
-            range.addEventListener('input', () => {
-        
-                $('#range-span').innerText = range.value
-            })
+
+        // // обираємо час доставки/забирання
+        // } else if(event.target.id === 'range-input'){
+
+        //     const range = event.target
+
+        //     range.addEventListener('input', () => {
+
+        //         $('#range-span').innerText = range.value
+        //     })
 
         // обираємо варіант: доставка/забрати самостійно
         } else if(event.target.id === 'discount-delivery'){
-        
+
             $('#total-goods').innerText = totalSum()
-            
+
         // обираємо варіант: доставка/забрати самостійно
         } else if(event.target.id === 'discount-without-delivery'){
-            
+
             $('#total-goods').innerText = totalSum() - totalSumDiscount()/100*25
         }
 
     })
 
-    // чЕкаємо місце доставки
-    $$('#area input').forEach(item => {
+    // // чЕкаємо місце доставки
+    // $$('#area input').forEach(item => {
 
-        item.addEventListener('input', function() {
+    //     item.addEventListener('input', function() {
 
-            // міняємо мінімальну суму замовлення
-            this.value === 'Львів' ? 
-                $('#area-check').textContent = '400' : 
-                $('#area-check').textContent = '600'
+    //         // міняємо мінімальну суму замовлення
+    //         this.value === 'Львів' ?
+    //             $('#area-check').textContent = '400' :
+    //             $('#area-check').textContent = '600'
 
-            // показати/сховати форму
-            // toggleForm()
-        })
-    })
+    //         // показати/сховати форму
+    //         // toggleForm()
+    //     })
+    // })
 
     // Всього (сума в гривнях)
     $('#total-goods').innerHTML = totalSum()
@@ -608,7 +596,7 @@ basket.addEventListener('click', () => {
         const form_comment = $('#form-comment').value
         const form_range = $('#range-input').value
 
-        let discount_without_delivery = 0;
+        let discount_without_delivery = '0';
 
         if($('#discount-without-delivery input').checked === true){
 
@@ -637,22 +625,22 @@ basket.addEventListener('click', () => {
         if(result == 'ok'){
 
             // очистка бази
-            localStorage.clear()            
+            localStorage.clear()
 
             removeOrder()
             // hideOrderForm()
             toggleBasket()
-            
+
             names = []
             prices = []
-            
+
             // очищаємо всі активні товари
             for(let i = 0; i < products.length; i++) products[i].classList.remove('active')
 
             let ok
 
             setTimeout(() => {
-                
+
                 ok = new Fancybox([
                     {
                         src: '<p>Усе гаразд! Замовлення надіслано!</p>',
@@ -663,7 +651,7 @@ basket.addEventListener('click', () => {
             }, 1000)
 
             setTimeout(() => {
-                
+
                 ok.close()
                 location.reload()
 
@@ -693,6 +681,8 @@ function element(tag = 'div'){
 function viewGoods(){
     names = JSON.parse(localStorage.getItem('names')).split(';')
     prices = JSON.parse(localStorage.getItem('prices')).split(';')
+
+    // todo: перевірка -- якщо names містить спецсимволи, то розбити рядок і винести дані під блок з товаром (додаткові опції для місо-боула)
 
     let output = ''
 
@@ -732,7 +722,7 @@ function toggleDiscount(){
         $('#discount').classList.add('active')
         $('#discount span').innerText = totalSumDiscount()/100*25
     } else {
-        
+
         $('#discount').classList.remove('active')
     }
 }

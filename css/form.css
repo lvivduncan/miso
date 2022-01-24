@@ -194,8 +194,8 @@ label
 {
     font-weight: bold;
     display: flex;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: var(--white);
     align-items: center;
     justify-content: center;
@@ -214,8 +214,8 @@ label
 {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 5px;
+    top: 13px;
+    left: 10px;
     width: 10px;
     height: 1px;
     background: var(--white);
@@ -226,8 +226,8 @@ label
 {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 5px;
+    top: 13px;
+    left: 10px;
     width: 10px;
     height: 1px;
     background: var(--white);
@@ -243,8 +243,8 @@ label
 {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 5px;
+    top: 13px;
+    left: 10px;
     width: 10px;
     height: 1px;
     background: var(--white);
@@ -255,8 +255,8 @@ label
 {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 5px;
+    top: 13px;
+    left: 10px;
     width: 10px;
     height: 1px;
     background: var(--white);
@@ -286,7 +286,7 @@ label
 /* /////////////////
 // місце доставки //
 ///////////////// */
-
+/* 
 #area
 {
     display: grid;
@@ -321,7 +321,7 @@ label
 #area-check::after
 {
     content: ' грн';
-}
+} */
 
 /* можлива знижка, якщо забрати самому */
 #discount
@@ -349,4 +349,13 @@ label
 #discount span::after
 {
     content: ' грн'
+}
+
+/*
+примітка
+*/
+.notice
+{
+    color: var(--white);
+    text-align: center;
 }

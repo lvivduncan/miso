@@ -133,7 +133,7 @@
     font-weight: 300;
     font-size: 18px;
     display: flex;
-    gap: (--gap);
+    gap: var(--gap);
 }
 
 .menu p s
@@ -162,4 +162,53 @@
     {
         margin: var(--gap100) 0;
     }    
+}
+
+/* //////////////////////////////////
+// miso-boul -- 1 товар! + додатки //
+////////////////////////////////// */
+.menu article.boul
+{
+    grid-column: 1/-1;
+
+    grid-template-columns: 40px repeat(2,1fr);
+    grid-template-areas:
+        'menu-aside menu-header menu-header'
+        'menu-aside menu-p menu-p'
+        'menu-aside menu-div menu-div'
+        'menu-aside menu-ul-1 menu-ul-2'
+        /* 'menu-aside menu-ul-2' */
+
+}
+
+.menu article.boul div
+{
+    grid-area: menu-div;
+
+    font-style: italic;
+    /* color: var(--black) */
+}
+
+.menu article.boul ul 
+{
+    grid-area: menu-ul-2;
+
+    /* margin: var(--gap) 0 0; */
+    display: block;
+}
+
+.menu article.boul ul:nth-of-type(1)
+{
+    grid-area: menu-ul-1;
+}
+
+.menu article.boul li
+{
+    display: block;
+    margin: 8px 0;
+}
+
+.menu article.boul del 
+{
+    display: none;
 }
